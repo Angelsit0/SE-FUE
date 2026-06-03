@@ -6,7 +6,8 @@
 
 export class GameState {
   constructor() {
-    this.currentLevel = 0; // 0-3 for levels 1-4
+    this.currentLevel = 0; // 0-4 for levels 1-5
+    this.currentProblem = null;
     this.score = 0;
     this.timeRemaining = 300; // 5 minutes in seconds
     this.gameStatus = 'idle'; // idle, playing, paused, gameover, victory
@@ -55,7 +56,7 @@ export class GameState {
 
   nextLevel() {
     this.currentLevel++;
-    if (this.currentLevel >= 4) {
+    if (this.currentLevel >= 5) {
       this.triggerVictory();
     } else {
       this._notify('levelChanged', { level: this.currentLevel });

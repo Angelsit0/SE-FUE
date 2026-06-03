@@ -20,6 +20,8 @@ export class GameView {
     // Controls
     this.logicControls = document.getElementById('logic-controls');
     this.vennControls = document.getElementById('venn-controls');
+    this.wiresConnectControls = document.getElementById('wires-connect-controls');
+    this.wiresCutControls = document.getElementById('wires-cut-controls');
     this.logicVariables = document.getElementById('logic-variables');
 
     // Background
@@ -68,20 +70,21 @@ export class GameView {
    * @param {number} levelIndex - 0-based level index.
    */
   updateLevel(levelIndex) {
-    if (this.hudLevel) this.hudLevel.textContent = `${levelIndex + 1}/4`;
+    if (this.hudLevel) this.hudLevel.textContent = `${levelIndex + 1}/5`;
   }
 
   /**
    * Display a level's data: location, problem, background, and controls.
    * @param {object} levelData - Level configuration object.
+   * @param {object} problemData - Specific problem to display.
    */
-  showLevel(levelData) {
+  showLevel(levelData, problemData) {
     // Set location
     if (this.locationText) this.locationText.textContent = `${levelData.locationIcon} ${levelData.location}`;
 
     // Set problem
     if (this.problemTitle) this.problemTitle.textContent = levelData.title;
-    if (this.problemDesc) this.problemDesc.textContent = levelData.description;
+    if (this.problemDesc) this.problemDesc.textContent = problemData.description;
 
     // Set background
     if (this.gameBgImg) {
@@ -89,29 +92,39 @@ export class GameView {
       this.gameBgImg.alt = levelData.location;
     }
 
+    // Hide all controls first
+    [this.logicControls, this.vennControls, this.wiresConnectControls, this.wiresCutControls].forEach(c => {
+      if (c) c.classList.remove('active');
+    });
+
     // Show correct controls
-    if (levelData.type === 'logic') {
-      this._showLogicControls(levelData);
-    } else {
-      this._showVennControls(levelData);
+    if (problemData.type === 'logic') {
+      this._showLogicControls(problemData);
+    } else if (problemData.type === 'venn') {
+      this._showVennControls(problemData);
+    } else if (problemData.type === 'wires-connect') {
+      if (this.wiresConnectControls) this.wiresConnectControls.classList.add('active');
+      if (this.problemExpr) this.problemExpr.textContent = '';
+    } else if (problemData.type === 'wires-cut') {
+      if (this.wiresCutControls) this.wiresCutControls.classList.add('active');
+      if (this.problemExpr) this.problemExpr.textContent = '';
     }
   }
 
   /**
    * @private Show logic controls (true/false buttons + variables).
    */
-  _showLogicControls(levelData) {
+  _showLogicControls(problemData) {
     if (this.logicControls) this.logicControls.classList.add('active');
-    if (this.vennControls) this.vennControls.classList.remove('active');
 
     if (this.problemExpr) {
-      this.problemExpr.textContent = `${levelData.expressionDetail}  →  ${levelData.expression}`;
+      this.problemExpr.textContent = `${problemData.expressionDetail}  →  ${problemData.expression}`;
     }
 
     // Show variables
     if (this.logicVariables) {
       this.logicVariables.innerHTML = '';
-      Object.entries(levelData.variables).forEach(([name, value]) => {
+      Object.entries(problemData.variables).forEach(([name, value]) => {
         const div = document.createElement('div');
         div.className = 'logic-var';
         div.innerHTML = `<span class="var-name">${name}</span> = <span class="var-value ${value ? 'var-true' : 'var-false'}">${value ? 'VERDADERO' : 'FALSO'}</span>`;
@@ -123,12 +136,11 @@ export class GameView {
   /**
    * @private Show Venn diagram controls.
    */
-  _showVennControls(levelData) {
-    if (this.logicControls) this.logicControls.classList.remove('active');
+  _showVennControls(problemData) {
     if (this.vennControls) this.vennControls.classList.add('active');
 
     if (this.problemExpr) {
-      this.problemExpr.textContent = `${levelData.operation}  →  ${levelData.operationDetail}`;
+      this.problemExpr.textContent = `${problemData.operation}  →  ${problemData.operationDetail}`;
     }
   }
 

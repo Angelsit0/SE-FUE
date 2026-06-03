@@ -317,6 +317,123 @@
     box-shadow: 0 0 25px rgba(255,204,0,0.4);
 }
 
+/* ─── WIRES CONNECT CONTROLS ─── */
+.wires-connect-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+}
+.wires-connect-controls.active {
+    display: flex;
+}
+.wires-instrucciones {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--neon-yellow);
+    text-align: center;
+    margin-bottom: 10px;
+}
+.wires-board {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: min(500px, 90vw);
+    height: 300px;
+    background: #1a1a1a;
+    border: 2px solid var(--bg-light);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.wires-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+.wires-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 2;
+    height: 100%;
+}
+.wire-node {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    transition: transform 0.2s;
+    background: #000;
+}
+.wire-node:hover {
+    transform: scale(1.2);
+}
+.wire-node.selected {
+    box-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+    border-color: currentColor;
+    transform: scale(1.3);
+}
+
+/* ─── WIRES CUT CONTROLS ─── */
+.wires-cut-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+.wires-cut-controls.active {
+    display: flex;
+}
+.bomb-panel {
+    background: #111;
+    border: 4px solid #333;
+    padding: 30px;
+    border-radius: 10px;
+    width: min(400px, 90vw);
+    box-shadow: inset 0 0 30px #000;
+    box-sizing: border-box;
+}
+.wire-cut-container {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+.cut-wire {
+    width: 100%;
+    height: 20px;
+    background: currentColor;
+    border-radius: 10px;
+    cursor: crosshair;
+    position: relative;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.3);
+}
+.cut-wire:hover {
+    filter: brightness(1.2);
+}
+.cut-wire.cut {
+    opacity: 0.3;
+    pointer-events: none;
+}
+.cut-wire.cut::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -5px;
+    width: 15px;
+    height: 30px;
+    background: #111;
+    transform: translateX(-50%);
+    border-left: 2px solid #333;
+    border-right: 2px solid #333;
+}
+
 /* ─── FEEDBACK OVERLAY ─── */
 .feedback-overlay {
     position: fixed;

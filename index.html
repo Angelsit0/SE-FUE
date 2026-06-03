@@ -214,6 +214,25 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Wires Connect Controls (Level 5) -->
+            <div id="wires-connect-controls" class="game-controls wires-connect-controls">
+                <p class="wires-instrucciones">Empalme terminales del mismo color.</p>
+                <div class="wires-board" id="wires-board">
+                    <div class="wires-col" id="wires-left"></div>
+                    <!-- Canvas para dibujar los cables conectados -->
+                    <canvas id="wires-canvas" class="wires-canvas"></canvas>
+                    <div class="wires-col" id="wires-right"></div>
+                </div>
+            </div>
+
+            <!-- Wires Cut Controls (Level 5) -->
+            <div id="wires-cut-controls" class="game-controls wires-cut-controls">
+                <p class="wires-instrucciones">Corte el cable correcto según el protocolo (Capítulo VII).</p>
+                <div class="bomb-panel">
+                    <div class="wire-cut-container" id="wire-cut-container"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Feedback Overlay -->
@@ -364,6 +383,38 @@
                             <p>💀 Si el tiempo llega a cero: SE FUE</p>
                             <p>🏆 Completa los 4 niveles para ganar</p>
                         </div>
+                    </div>
+
+                    <!-- Page 7: Empalme de Cables -->
+                    <div class="manual-page" data-page="7">
+                        <h2 class="manual-page-title">CAPÍTULO VI: EMPALME DE CABLES</h2>
+                        <div class="manual-divider">───────────────────</div>
+                        <p>En caso de fallo en el bus de datos principal, deberá reconectar los filamentos de fibra óptica manualmente.</p>
+                        <h3>Protocolo de Empalme:</h3>
+                        <ul>
+                            <li>Los cables sólo pueden transmitir datos si los colores <strong>coinciden exactamente</strong>.</li>
+                            <li>Seleccione un terminal en el panel izquierdo (ej. <span style="color:var(--danger-red)">ROJO</span>).</li>
+                            <li>Seleccione el terminal correspondiente en el panel derecho.</li>
+                            <li>Repita hasta que todos los terminales estén conectados.</li>
+                        </ul>
+                        <div class="manual-warning-box">
+                            <p>⚠️ ADVERTENCIA: Un cruce de cables causará un cortocircuito, resultando en penalización de tiempo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Page 8: Protocolo de Desactivación -->
+                    <div class="manual-page" data-page="8">
+                        <h2 class="manual-page-title">CAPÍTULO VII: PROTOCOLO DE CORTE</h2>
+                        <div class="manual-divider">───────────────────</div>
+                        <p>Si la sobrecarga es inminente, debe <strong>cortar un único cable</strong> para purgar la energía.</p>
+                        <h3>Reglas de Corte (En Orden de Prioridad):</h3>
+                        <div class="manual-steps" style="font-size: 14px;">
+                            <p>1. Si hay exactamente <strong>1 cable rojo</strong> y <strong>1 cable verde</strong>, corta el cable <strong style="color:var(--danger-red)">ROJO</strong>.</p>
+                            <p>2. Si no se cumple lo anterior, y hay <strong>más de 1 cable rojo</strong>, corta el <strong>ÚLTIMO</strong> cable rojo.</p>
+                            <p>3. Si no se cumple lo anterior, y hay un <strong>cable negro</strong>, corta el <strong>PRIMER</strong> cable de todo el panel.</p>
+                            <p>4. <strong>De lo contrario</strong>, corta el <strong>ÚLTIMO</strong> cable de todo el panel.</p>
+                        </div>
+                        <p class="manual-tip">💡 Lee las reglas desde arriba hacia abajo. La primera que se cumpla es la que debes ejecutar.</p>
                     </div>
                 </div>
 

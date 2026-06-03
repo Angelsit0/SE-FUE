@@ -4,7 +4,7 @@
 // ============================================
 
 import { gameState } from '../model/GameState.js';
-import { LEVELS, validateLogicAnswer, validateVennAnswer } from '../model/LevelData.js';
+import { LEVELS, getRandomProblem, validateLogicAnswer, validateVennAnswer, validateWireCut } from '../model/LevelData.js';
 import { TimerModel } from '../model/TimerModel.js';
 import { LeaderboardModel } from '../model/LeaderboardModel.js';
 import { UserModel } from '../model/UserModel.js';
@@ -277,18 +277,157 @@ export class GameController {
         const level = LEVELS[levelIndex];
         if (!level) return;
 
+        // Fetch random problem for this level
+        const problem = getRandomProblem(levelIndex);
+        gameState.currentProblem = problem;
+
         // Actualizar vista
         this.gameView.updateLevel(levelIndex);
-        this.gameView.showLevel(level);
+        this.gameView.showLevel(level, problem);
 
-        // Renderizar diagrama de Venn si es necesario
-        if (level.type === 'venn') {
-            if (level.sets.length === 2) {
+        // Renderizar controles especiales
+        if (problem.type === 'venn') {
+            if (problem.sets.length === 2) {
                 this.vennView.render2Sets();
             } else {
                 this.vennView.render3Sets();
             }
+        } else if (problem.type === 'wires-connect') {
+            this._renderWiresConnect(problem);
+        } else if (problem.type === 'wires-cut') {
+            this._renderWiresCut(problem);
         }
+    }
+
+    _renderWiresConnect(problem) {
+        const leftCol = document.getElementById('wires-left');
+        const rightCol = document.getElementById('wires-right');
+        const canvas = document.getElementById('wires-canvas');
+        if (!leftCol || !rightCol || !canvas) return;
+
+        leftCol.innerHTML = '';
+        rightCol.innerHTML = '';
+        const ctx = canvas.getContext('2d');
+        
+        // Wait for next paint to get dimensions
+        setTimeout(() => {
+            canvas.width = canvas.offsetWidth || 400;
+            canvas.height = canvas.offsetHeight || 250;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }, 50);
+
+        const shuffledLeft = [...problem.colors].sort(() => Math.random() - 0.5);
+        const shuffledRight = [...problem.colors].sort(() => Math.random() - 0.5);
+
+        this._wireConnections = [];
+        let selectedLeftNode = null;
+        this._wireNodesLeft = [];
+        this._wireNodesRight = [];
+
+        shuffledLeft.forEach((color) => {
+            const node = document.createElement('div');
+            node.className = 'wire-node';
+            node.style.color = color;
+            node.dataset.color = color;
+            node.dataset.side = 'left';
+            node.addEventListener('click', () => {
+                if (gameState.gameStatus !== 'playing') return;
+                if (this._wireConnections.includes(color)) return;
+                this.audio.playClick();
+                if (selectedLeftNode) selectedLeftNode.classList.remove('selected');
+                selectedLeftNode = node;
+                node.classList.add('selected');
+            });
+            this._wireNodesLeft.push(node);
+            leftCol.appendChild(node);
+        });
+
+        shuffledRight.forEach((color) => {
+            const node = document.createElement('div');
+            node.className = 'wire-node';
+            node.style.color = color;
+            node.dataset.color = color;
+            node.dataset.side = 'right';
+            node.addEventListener('click', () => {
+                if (gameState.gameStatus !== 'playing') return;
+                if (this._wireConnections.includes(color)) return;
+                if (!selectedLeftNode) return;
+                this.audio.playClick();
+                
+                const leftColor = selectedLeftNode.dataset.color;
+                if (leftColor === color) {
+                    this._wireConnections.push(color);
+                    selectedLeftNode.classList.remove('selected');
+                    selectedLeftNode = null;
+                    this._drawWireConnections();
+                    
+                    if (this._wireConnections.length === problem.colors.length) {
+                        this._processAnswer(true);
+                    }
+                } else {
+                    selectedLeftNode.classList.remove('selected');
+                    selectedLeftNode = null;
+                    this._processAnswer(false);
+                }
+            });
+            this._wireNodesRight.push(node);
+            rightCol.appendChild(node);
+        });
+    }
+
+    _drawWireConnections() {
+        const canvas = document.getElementById('wires-canvas');
+        const board = document.getElementById('wires-board');
+        if (!canvas || !board) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.lineWidth = 6;
+        ctx.lineCap = 'round';
+
+        this._wireConnections.forEach(color => {
+            const leftNode = this._wireNodesLeft.find(n => n.dataset.color === color);
+            const rightNode = this._wireNodesRight.find(n => n.dataset.color === color);
+            if (leftNode && rightNode) {
+                const lRect = leftNode.getBoundingClientRect();
+                const rRect = rightNode.getBoundingClientRect();
+                const bRect = board.getBoundingClientRect();
+
+                const x1 = (lRect.left - bRect.left) + lRect.width / 2;
+                const y1 = (lRect.top - bRect.top) + lRect.height / 2;
+                const x2 = (rRect.left - bRect.left) + rRect.width / 2;
+                const y2 = (rRect.top - bRect.top) + rRect.height / 2;
+
+                ctx.strokeStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.bezierCurveTo(x1 + 100, y1, x2 - 100, y2, x2, y2);
+                ctx.stroke();
+            }
+        });
+    }
+
+    _renderWiresCut(problem) {
+        const container = document.getElementById('wire-cut-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        problem.wires.forEach((color, index) => {
+            const wire = document.createElement('div');
+            wire.className = 'cut-wire';
+            wire.style.color = color;
+            wire.dataset.index = index;
+            wire.dataset.color = color;
+            
+            wire.addEventListener('click', () => {
+                if (gameState.gameStatus !== 'playing') return;
+                this.audio.playClick();
+                wire.classList.add('cut');
+                const isCorrect = validateWireCut(problem, color, index);
+                this._processAnswer(isCorrect);
+            }, { once: true });
+
+            container.appendChild(wire);
+        });
     }
 
     // ═══════════════════════════════════════════════
@@ -298,23 +437,23 @@ export class GameController {
     _handleLogicAnswer(answer) {
         if (gameState.gameStatus !== 'playing') return;
 
-        const currentLevel = LEVELS[gameState.currentLevel];
-        if (!currentLevel || currentLevel.type !== 'logic') return;
+        const problem = gameState.currentProblem;
+        if (!problem || problem.type !== 'logic') return;
 
         this.audio.playClick();
-        const isCorrect = validateLogicAnswer(gameState.currentLevel, answer);
+        const isCorrect = validateLogicAnswer(problem, answer);
         this._processAnswer(isCorrect);
     }
 
     _handleVennConfirm() {
         if (gameState.gameStatus !== 'playing') return;
 
-        const currentLevel = LEVELS[gameState.currentLevel];
-        if (!currentLevel || currentLevel.type !== 'venn') return;
+        const problem = gameState.currentProblem;
+        if (!problem || problem.type !== 'venn') return;
 
         this.audio.playClick();
         const selectedRegions = this.vennView.getSelectedRegions();
-        const isCorrect = validateVennAnswer(gameState.currentLevel, selectedRegions);
+        const isCorrect = validateVennAnswer(problem, selectedRegions);
         this._processAnswer(isCorrect);
     }
 
