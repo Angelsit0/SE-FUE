@@ -11,12 +11,11 @@ export const LEVELS = [
     location: 'Parpadeo en la Biblioteca',
     locationIcon: '📚',
     backgroundImage: 'assets/backgrounds/level1_biblioteca.jpg',
-    problems: [
-      { type: 'logic', description: '[CÓDIGO L1-A] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: false, q: true }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: '[CÓDIGO L1-B] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: true, q: false }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: '[CÓDIGO L1-C] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: true }, expression: 'NO p (¬p)', expressionDetail: 'p = VERDADERO', expectedAnswer: false },
-      { type: 'logic', description: '[CÓDIGO L1-D] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: false, q: false }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: '[CÓDIGO L1-E] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: true, q: true }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true }
+      { type: 'logic', description: 'PREGUNTA L1-A: Si A es FALSO y B es VERDADERO. ¿"A o B" es verdadero?', variables: { p: false, q: true }, expression: 'A o B', expressionDetail: 'A=FALSO, B=VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L1-B: Si A es VERDADERO y B es FALSO. ¿"A y B" es verdadero?', variables: { p: true, q: false }, expression: 'A y B', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L1-C: Si A es VERDADERO. ¿Lo contrario de A (NO A) es verdadero?', variables: { p: true }, expression: 'NO A', expressionDetail: 'A=VERDADERO', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L1-D: Si A es FALSO y B es FALSO. ¿"A o B" es verdadero?', variables: { p: false, q: false }, expression: 'A o B', expressionDetail: 'A=FALSO, B=FALSO', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L1-E: Si A es VERD. y B es VERD. ¿"A y B" es verdadero?', variables: { p: true, q: true }, expression: 'A y B', expressionDetail: 'A=VERD., B=VERD.', expectedAnswer: true }
     ]
   },
   {
@@ -26,11 +25,11 @@ export const LEVELS = [
     locationIcon: '🏥',
     backgroundImage: 'assets/backgrounds/level2_odontologia.jpg',
     problems: [
-      { type: 'venn', description: '[CÓDIGO L2-A] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'AB', 'B_only'] },
-      { type: 'venn', description: '[CÓDIGO L2-B] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A INTERSECCIÓN B (A ∩ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AB'] },
-      { type: 'venn', description: '[CÓDIGO L2-C] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A MENOS B (A − B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
-      { type: 'venn', description: '[CÓDIGO L2-D] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'B MENOS A (B − A)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
-      { type: 'venn', description: '[CÓDIGO L2-E] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'AB', 'B_only'] }
+      { type: 'venn', description: 'PREGUNTA L2-A: Toca SOLO la media luna izquierda de A (A sin B).', sets: ['A', 'B'], operation: 'A MENOS B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-B: Toca SOLO el centro donde se cruzan A y B.', sets: ['A', 'B'], operation: 'INTERSECCIÓN (A ∩ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AB'] },
+      { type: 'venn', description: 'PREGUNTA L2-C: Toca SOLO la media luna derecha de B (B sin A).', sets: ['A', 'B'], operation: 'B MENOS A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-D: Toca TODO, los dos círculos completos (las 3 partes).', sets: ['A', 'B'], operation: 'UNIÓN (A ∪ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'AB', 'B_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-E: Toca SOLO el centro donde se cruzan A y B.', sets: ['A', 'B'], operation: 'INTERSECCIÓN (A ∩ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AB'] }
     ]
   },
   {
@@ -40,11 +39,11 @@ export const LEVELS = [
     locationIcon: '⚙️',
     backgroundImage: 'assets/backgrounds/level3_laboratorio.jpg',
     problems: [
-      { type: 'logic', description: '[CÓDIGO L3-A] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: true, q: false }, expression: 'NO (p Y NO q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: '[CÓDIGO L3-B] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: false, q: false }, expression: 'NO (p O q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: true },
-      { type: 'logic', description: '[CÓDIGO L3-C] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: true, q: true }, expression: 'NO (NO p O NO q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: '[CÓDIGO L3-D] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: false, q: true }, expression: 'NO p Y q', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: '[CÓDIGO L3-E] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: true, q: false }, expression: 'NO p O q', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false }
+      { type: 'logic', description: 'PREGUNTA L3-A: Ley de Morgan 1. Lee el manual y responde.', variables: { p: true, q: false }, expression: 'Morgan L3-A', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L3-B: Ley de Morgan 2. Lee el manual y responde.', variables: { p: false, q: false }, expression: 'Morgan L3-B', expressionDetail: 'A=FALSO, B=FALSO', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L3-C: Ley de Morgan 3. Lee el manual y responde.', variables: { p: true, q: true }, expression: 'Morgan L3-C', expressionDetail: 'A=VERD., B=VERD.', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L3-D: Ley de Morgan 4. Lee el manual y responde.', variables: { p: false, q: true }, expression: 'Morgan L3-D', expressionDetail: 'A=FALSO, B=VERD.', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L3-E: Ley de Morgan 5. Lee el manual y responde.', variables: { p: true, q: false }, expression: 'Morgan L3-E', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: false }
     ]
   },
   {
@@ -54,11 +53,11 @@ export const LEVELS = [
     locationIcon: '🏛️',
     backgroundImage: 'assets/backgrounds/level4_rectorado.jpg',
     problems: [
-      { type: 'venn', description: '[CÓDIGO L4-A] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: '(A INTERSECCIÓN C) MENOS B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AC_only'] },
-      { type: 'venn', description: '[CÓDIGO L4-B] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: '(A UNIÓN B) INTERSECCIÓN C', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AC_only', 'BC_only', 'ABC'] },
-      { type: 'venn', description: '[CÓDIGO L4-C] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: 'A INTERSECCIÓN B INTERSECCIÓN C', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['ABC'] },
-      { type: 'venn', description: '[CÓDIGO L4-D] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: '(A MENOS B) UNIÓN C', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'C_only', 'AC_only', 'BC_only', 'ABC'] },
-      { type: 'venn', description: '[CÓDIGO L4-E] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: 'C MENOS (A UNIÓN B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['C_only'] }
+      { type: 'venn', description: 'PREGUNTA L4-A: Toca ÚNICAMENTE el triángulo del centro (donde se cruzan los 3).', sets: ['A', 'B', 'C'], operation: 'Solo el Centro (ABC)', operationDetail: 'Toca 1 sola zona', expectedRegions: ['ABC'] },
+      { type: 'venn', description: 'PREGUNTA L4-B: Toca ÚNICAMENTE la zona exterior de A (arriba izquierda) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo A Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-C: Toca ÚNICAMENTE la zona exterior de B (arriba derecha) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo B Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-D: Toca ÚNICAMENTE la zona exterior de C (abajo al centro) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo C Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['C_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-E: Toca ÚNICAMENTE donde se cruzan A y B (arriba al medio), sin tocar a C.', sets: ['A', 'B', 'C'], operation: 'Cruce A y B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['AB_only'] }
     ]
   },
   {
