@@ -12,11 +12,11 @@ export const LEVELS = [
     locationIcon: '📚',
     backgroundImage: 'assets/backgrounds/level1_biblioteca.jpg',
     problems: [
-      { type: 'logic', description: 'El sistema detecta una fluctuación. Resuelve si el circuito es VERDADERO o FALSO.', variables: { p: false, q: true }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: 'Cruce de circuitos detectado. Resuelve si la condición es VERDADERA o FALSA.', variables: { p: true, q: false }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'Advertencia de sobrecarga térmica. Resuelve la negación (lo contrario).', variables: { p: true }, expression: 'NO p (¬p)', expressionDetail: 'p = VERDADERO', expectedAnswer: false },
-      { type: 'logic', description: 'Falla en el relé principal. Analice esta opción.', variables: { p: false, q: false }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'Estabilización requerida en terminales B. Evalúe la conjunción.', variables: { p: true, q: true }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true }
+      { type: 'logic', description: '[CÓDIGO L1-A] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: false, q: true }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: '[CÓDIGO L1-B] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: true, q: false }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
+      { type: 'logic', description: '[CÓDIGO L1-C] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: true }, expression: 'NO p (¬p)', expressionDetail: 'p = VERDADERO', expectedAnswer: false },
+      { type: 'logic', description: '[CÓDIGO L1-D] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: false, q: false }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: false },
+      { type: 'logic', description: '[CÓDIGO L1-E] Busca este código en la PÁGINA 2 del manual para saber la respuesta.', variables: { p: true, q: true }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true }
     ]
   },
   {
@@ -26,11 +26,11 @@ export const LEVELS = [
     locationIcon: '🏥',
     backgroundImage: 'assets/backgrounds/level2_odontologia.jpg',
     problems: [
-      { type: 'venn', description: 'Se requiere redirigir la energía. Toca las zonas correctas en los círculos.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona TODAS las zonas de A y de B', expectedRegions: ['A_only', 'AB', 'B_only'] },
-      { type: 'venn', description: 'Interferencia electromagnética. Aísle el solapamiento.', sets: ['A', 'B'], operation: 'A INTERSECCIÓN B (A ∩ B)', operationDetail: 'Selecciona SOLO donde se cruzan A y B', expectedRegions: ['AB'] },
-      { type: 'venn', description: 'Falla en la válvula B. Purgue B conservando A.', sets: ['A', 'B'], operation: 'A MENOS B (A − B)', operationDetail: 'Selecciona A, pero quítale la parte de B', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'Falla en la válvula A. Purgue A conservando B.', sets: ['A', 'B'], operation: 'B MENOS A (B − A)', operationDetail: 'Selecciona B, pero quítale la parte de A', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'Cortocircuito externo. Desvíe la energía a los nodos.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona TODAS las zonas de A y B', expectedRegions: ['A_only', 'AB', 'B_only'] }
+      { type: 'venn', description: '[CÓDIGO L2-A] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'AB', 'B_only'] },
+      { type: 'venn', description: '[CÓDIGO L2-B] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A INTERSECCIÓN B (A ∩ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AB'] },
+      { type: 'venn', description: '[CÓDIGO L2-C] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A MENOS B (A − B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
+      { type: 'venn', description: '[CÓDIGO L2-D] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'B MENOS A (B − A)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
+      { type: 'venn', description: '[CÓDIGO L2-E] Busca este código en la PÁGINA 3 del manual para saber qué círculos presionar.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'AB', 'B_only'] }
     ]
   },
   {
@@ -40,11 +40,11 @@ export const LEVELS = [
     locationIcon: '⚙️',
     backgroundImage: 'assets/backgrounds/level3_laboratorio.jpg',
     problems: [
-      { type: 'logic', description: 'Falla crítica. Toca el manual para ver la tabla de ayuda rápida si no sabes qué responder.', variables: { p: true, q: false }, expression: 'NO (p Y NO q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'Anomalía en el inversor. Revisa la tabla del manual.', variables: { p: false, q: false }, expression: 'NO (p O q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: true },
-      { type: 'logic', description: 'Inestabilidad cuántica en los puertos. Usa la ayuda del manual.', variables: { p: true, q: true }, expression: 'NO (NO p O NO q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: 'Desajuste en los fusibles lógicos.', variables: { p: false, q: true }, expression: 'NO p Y q', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: 'Resonancia de ciclos. Evalúe la expresión.', variables: { p: true, q: false }, expression: 'NO p O q', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false }
+      { type: 'logic', description: '[CÓDIGO L3-A] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: true, q: false }, expression: 'NO (p Y NO q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
+      { type: 'logic', description: '[CÓDIGO L3-B] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: false, q: false }, expression: 'NO (p O q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: true },
+      { type: 'logic', description: '[CÓDIGO L3-C] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: true, q: true }, expression: 'NO (NO p O NO q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: '[CÓDIGO L3-D] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: false, q: true }, expression: 'NO p Y q', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: '[CÓDIGO L3-E] Busca este código en la PÁGINA 4 del manual para saber la respuesta exacta.', variables: { p: true, q: false }, expression: 'NO p O q', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false }
     ]
   },
   {
@@ -54,11 +54,11 @@ export const LEVELS = [
     locationIcon: '🏛️',
     backgroundImage: 'assets/backgrounds/level4_rectorado.jpg',
     problems: [
-      { type: 'venn', description: 'Hay 3 círculos. Lee la instrucción y ve marcando paso a paso.', sets: ['A', 'B', 'C'], operation: '(A INTERSECCIÓN C) MENOS B', operationDetail: 'Marca donde se cruzan A y C, pero quítale la zona de B', expectedRegions: ['AC_only'] },
-      { type: 'venn', description: 'Reenrutando servidores centrales.', sets: ['A', 'B', 'C'], operation: '(A UNIÓN B) INTERSECCIÓN C', operationDetail: 'La unión de A y B, pero solo en las partes que tocan a C', expectedRegions: ['AC_only', 'BC_only', 'ABC'] },
-      { type: 'venn', description: 'Falla en nodo C.', sets: ['A', 'B', 'C'], operation: 'A INTERSECCIÓN B INTERSECCIÓN C', operationDetail: 'Solo el pequeño triángulo central donde se cruzan los TRES', expectedRegions: ['ABC'] },
-      { type: 'venn', description: 'Protocolo de emergencia Delta.', sets: ['A', 'B', 'C'], operation: '(A MENOS B) UNIÓN C', operationDetail: 'Todo A (sin tocar B) más TODO el círculo C', expectedRegions: ['A_only', 'C_only', 'AC_only', 'BC_only', 'ABC'] },
-      { type: 'venn', description: 'Caída general inminente.', sets: ['A', 'B', 'C'], operation: 'C MENOS (A UNIÓN B)', operationDetail: 'Solo el círculo C puro (abajo), sin tocar A ni B', expectedRegions: ['C_only'] }
+      { type: 'venn', description: '[CÓDIGO L4-A] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: '(A INTERSECCIÓN C) MENOS B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AC_only'] },
+      { type: 'venn', description: '[CÓDIGO L4-B] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: '(A UNIÓN B) INTERSECCIÓN C', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AC_only', 'BC_only', 'ABC'] },
+      { type: 'venn', description: '[CÓDIGO L4-C] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: 'A INTERSECCIÓN B INTERSECCIÓN C', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['ABC'] },
+      { type: 'venn', description: '[CÓDIGO L4-D] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: '(A MENOS B) UNIÓN C', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'C_only', 'AC_only', 'BC_only', 'ABC'] },
+      { type: 'venn', description: '[CÓDIGO L4-E] Busca este código en la PÁGINA 5 del manual para saber qué zonas tocar.', sets: ['A', 'B', 'C'], operation: 'C MENOS (A UNIÓN B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['C_only'] }
     ]
   },
   {
