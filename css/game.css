@@ -381,6 +381,8 @@
 /* Responsividad para móviles */
 @media (max-width: 768px) {
     .game-hud {
+        position: relative; /* Evita que flote y superponga contenido */
+        background: rgba(0,0,0,0.85); /* Fondo más sólido */
         padding: 10px;
         flex-direction: column;
         align-items: center;
@@ -393,7 +395,7 @@
     
     .game-panel { 
         padding: 10px; 
-        margin-top: 100px; 
+        margin-top: 10px; /* HUD ya ocupa espacio natural, no hace falta 100px */
         gap: 10px;
     }
     .game-location { padding: 8px 15px; }
