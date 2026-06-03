@@ -268,120 +268,90 @@
 
                     <!-- Page 2: Lógica Proposicional -->
                     <div class="manual-page" data-page="2">
-                        <h2 class="manual-page-title">CAPÍTULO I: LÓGICA PROPOSICIONAL</h2>
+                        <h2 class="manual-page-title">CAPÍTULO I: AYUDA LÓGICA RÁPIDA</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <p>Una <strong>proposición</strong> es una afirmación que puede ser <strong>VERDADERA (V)</strong> o <strong>FALSA (F)</strong>.</p>
-                        <h3>Operadores Lógicos:</h3>
-                        <div class="manual-table">
-                            <table>
-                                <thead>
-                                    <tr><th>Símbolo</th><th>Nombre</th><th>Significado</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>∧</td><td>Conjunción (Y)</td><td>Ambos deben ser verdaderos</td></tr>
-                                    <tr><td>∨</td><td>Disyunción (O)</td><td>Al menos uno verdadero</td></tr>
-                                    <tr><td>¬</td><td>Negación (NO)</td><td>Invierte el valor</td></tr>
-                                    <tr><td>→</td><td>Implicación</td><td>Si...entonces</td></tr>
-                                </tbody>
-                            </table>
+                        <p>No te compliques. Solo lee la instrucción y presiona el botón correcto según estas reglas:</p>
+                        <div class="manual-warning-box">
+                            <p><strong>Si ves "p O q" (∨):</strong></p>
+                            <p>👉 Solo presiona FALSO si ambas letras dicen FALSO.<br>👉 Si ALGUNA dice VERDADERO, presiona VERDADERO.</p>
                         </div>
-                        <h3>Ejemplo:</h3>
-                        <p>Si <strong>p = Falso</strong> y <strong>q = Verdadero</strong>:</p>
-                        <p class="manual-example">p ∨ q = F ∨ V = <strong>VERDADERO</strong></p>
-                        <p class="manual-tip">💡 Recuerda: La disyunción (∨) solo es FALSA cuando AMBOS valores son falsos.</p>
+                        <div class="manual-warning-box">
+                            <p><strong>Si ves "p Y q" (∧):</strong></p>
+                            <p>👉 Solo presiona VERDADERO si ambas letras dicen VERDADERO.<br>👉 Si ALGUNA dice FALSO, presiona FALSO.</p>
+                        </div>
+                        <p class="manual-tip">💡 Si ves "NO p", simplemente presiona el botón contrario al valor que tenga p.</p>
                     </div>
 
                     <!-- Page 3: Tabla de Verdad -->
                     <div class="manual-page" data-page="3">
-                        <h2 class="manual-page-title">CAPÍTULO II: TABLAS DE VERDAD</h2>
+                        <h2 class="manual-page-title">CAPÍTULO II: CHULETA DE RESPUESTAS</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <h3>Tabla de Verdad — Conjunción (∧) y Disyunción (∨)</h3>
-                        <div class="manual-table">
+                        <p>Si tienes dudas, busca tu caso aquí:</p>
+                        <div class="manual-table" style="font-size: 14px;">
                             <table>
                                 <thead>
-                                    <tr><th>p</th><th>q</th><th>p ∧ q</th><th>p ∨ q</th></tr>
+                                    <tr><th>Valores</th><th>Si te piden "O"</th><th>Si te piden "Y"</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td>V</td><td>V</td><td>V</td><td>V</td></tr>
-                                    <tr><td>V</td><td>F</td><td>F</td><td>V</td></tr>
-                                    <tr><td>F</td><td>V</td><td>F</td><td>V</td></tr>
-                                    <tr><td>F</td><td>F</td><td>F</td><td>F</td></tr>
+                                    <tr><td>p=VERDADERO, q=VERDADERO</td><td>VERDADERO</td><td>VERDADERO</td></tr>
+                                    <tr><td>p=VERDADERO, q=FALSO</td><td>VERDADERO</td><td>FALSO</td></tr>
+                                    <tr><td>p=FALSO, q=VERDADERO</td><td>VERDADERO</td><td>FALSO</td></tr>
+                                    <tr><td>p=FALSO, q=FALSO</td><td>FALSO</td><td>FALSO</td></tr>
                                 </tbody>
                             </table>
                         </div>
-                        <h3>Tabla de Verdad — Negación (¬)</h3>
-                        <div class="manual-table">
-                            <table>
-                                <thead><tr><th>p</th><th>¬p</th></tr></thead>
-                                <tbody>
-                                    <tr><td>V</td><td>F</td></tr>
-                                    <tr><td>F</td><td>V</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <p class="manual-tip">💡 Consejo: Cuando tengas una expresión compleja, resuélvela desde los paréntesis internos hacia afuera, paso a paso.</p>
+                        <p class="manual-tip">💡 Con "O" casi siempre es Verdadero. Con "Y" casi siempre es Falso.</p>
                     </div>
 
                     <!-- Page 4: Leyes de De Morgan -->
                     <div class="manual-page" data-page="4">
-                        <h2 class="manual-page-title">CAPÍTULO III: LEYES DE DE MORGAN</h2>
+                        <h2 class="manual-page-title">CAPÍTULO III: LÓGICA AVANZADA (NIVEL 3)</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <p>Las <strong>Leyes de De Morgan</strong> son reglas fundamentales para simplificar expresiones con negaciones:</p>
-                        <div class="manual-formula-box">
-                            <p class="formula">¬(p ∧ q) = ¬p ∨ ¬q</p>
-                            <p class="formula">¬(p ∨ q) = ¬p ∧ ¬q</p>
-                        </div>
-                        <h3>Ejemplo Resuelto Paso a Paso:</h3>
-                        <p>Evaluar: <strong>¬(p ∧ ¬q)</strong> donde p = V, q = F</p>
+                        <p>En el Nivel 3 las cosas se complican porque todo tiene un "NO" adelante. Aquí tienes el truco directo:</p>
                         <div class="manual-steps">
-                            <p>Paso 1: ¬q = ¬F = <strong>V</strong></p>
-                            <p>Paso 2: p ∧ ¬q = V ∧ V = <strong>V</strong></p>
-                            <p>Paso 3: ¬(V) = <strong>F</strong></p>
+                            <p><strong>▶ Si ves: NO (p Y q)</strong><br>
+                            👉 Presiona FALSO <em>solo</em> si p y q son los dos VERDADEROS. En cualquier otro caso, presiona VERDADERO.</p>
+                            
+                            <p><strong>▶ Si ves: NO (p O q)</strong><br>
+                            👉 Presiona VERDADERO <em>solo</em> si p y q son los dos FALSOS. En cualquier otro caso, presiona FALSO.</p>
                         </div>
-                        <p class="manual-result">Resultado: <strong>FALSO</strong></p>
-                        <p class="manual-tip">💡 La clave: primero resuelve lo de adentro, luego niega todo el resultado.</p>
+                        <p class="manual-tip">💡 Al tener un NO al principio, la respuesta final es exactamente al revés de lo que sería normalmente.</p>
                     </div>
 
                     <!-- Page 5: Teoría de Conjuntos -->
                     <div class="manual-page" data-page="5">
-                        <h2 class="manual-page-title">CAPÍTULO IV: TEORÍA DE CONJUNTOS</h2>
+                        <h2 class="manual-page-title">CAPÍTULO IV: CÍRCULOS (NIVELES 2 Y 4)</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <p>Un <strong>conjunto</strong> es una colección de elementos. Las operaciones básicas son:</p>
-                        <div class="manual-table">
-                            <table>
-                                <thead>
-                                    <tr><th>Símbolo</th><th>Operación</th><th>Significado</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>A ∪ B</td><td>Unión</td><td>Todo lo que está en A, en B, o en ambos</td></tr>
-                                    <tr><td>A ∩ B</td><td>Intersección</td><td>Solo lo que está en ambos conjuntos</td></tr>
-                                    <tr><td>A − B</td><td>Diferencia</td><td>Lo que está en A pero NO en B</td></tr>
-                                </tbody>
-                            </table>
+                        <p>En estos niveles verás diagramas de círculos. Solo tienes que hacer clic en las zonas correctas y confirmar:</p>
+                        <div class="manual-steps" style="font-size: 14px;">
+                            <p><strong>🟢 UNIÓN (A ∪ B)</strong><br>
+                            Marca TODO. Haz clic en el círculo A completo, en el círculo B completo y en el medio. Todo iluminado.</p>
+                            
+                            <p><strong>🟢 INTERSECCIÓN (A ∩ B)</strong><br>
+                            Solo marca el pequeño pedacito del MEDIO donde los círculos se cruzan.</p>
+                            
+                            <p><strong>🟢 MENOS (A - B)</strong><br>
+                            Marca todo el círculo A, pero NO marques la parte que choca con B. Quedará en forma de medialuna.</p>
                         </div>
-                        <h3>Cómo usar los Diagramas de Venn:</h3>
-                        <p>Los diagramas muestran los conjuntos como círculos que se superponen. Debes <strong>hacer clic</strong> en las regiones correctas según la operación solicitada y luego <strong>confirmar</strong>.</p>
-                        <p class="manual-tip">💡 Para A ∪ B: ilumina TODAS las partes de ambos círculos (incluyendo la intersección).</p>
                     </div>
 
                     <!-- Page 6: Diagramas de Venn Avanzados -->
                     <div class="manual-page" data-page="6">
-                        <h2 class="manual-page-title">CAPÍTULO V: CONJUNTOS AVANZADOS</h2>
+                        <h2 class="manual-page-title">CAPÍTULO V: TRUCOS PARA NIVEL 4</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <h3>Operaciones Compuestas:</h3>
-                        <p>Expresión: <strong>(A ∩ C) − B</strong></p>
-                        <div class="manual-steps">
-                            <p>Paso 1: Encuentra A ∩ C (donde se cruzan A y C)</p>
-                            <p>Paso 2: De ese resultado, EXCLUYE todo lo que también esté en B</p>
-                            <p>Paso 3: Ilumina SOLO la región resultante</p>
+                        <p>El Nivel 4 tiene 3 círculos. Aquí tienes las soluciones directas a las preguntas más difíciles:</p>
+                        <div class="manual-steps" style="font-size: 14px;">
+                            <p><strong>▶ (A INTERSECCIÓN C) MENOS B</strong><br>
+                            Busca dónde se cruzan A y C, pero quítale todo lo que toque el círculo B de abajo.</p>
+                            
+                            <p><strong>▶ A INTERSECCIÓN B INTERSECCIÓN C</strong><br>
+                            Facilísimo: solo marca el pequeñito triángulo del centro absoluto donde se tocan los tres.</p>
+                            
+                            <p><strong>▶ C MENOS (A UNIÓN B)</strong><br>
+                            Marca solo el círculo C (el de abajo), sin tocar absolutamente nada de los de arriba.</p>
                         </div>
-                        <p class="manual-tip">💡 Es la parte donde A y C se superponen, PERO que NO toca a B.</p>
-                        <h3>Tips Generales:</h3>
                         <div class="manual-warning-box">
-                            <p>🔧 Cada respuesta correcta suma +500 puntos y +15 segundos</p>
-                            <p>⚠️ Cada error resta −20 segundos del reloj</p>
-                            <p>💀 Si el tiempo llega a cero: SE FUE</p>
-                            <p>🏆 Completa los 4 niveles para ganar</p>
+                            <p>⚠️ Cada error resta −20 segundos. Usa este manual sin miedo, el juego se pausa mientras lo lees.</p>
                         </div>
                     </div>
 

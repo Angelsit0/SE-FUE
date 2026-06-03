@@ -396,6 +396,8 @@ body {
         min-height: 100vh;
         height: auto;
         padding-bottom: 50px; /* Margen al fondo */
+        justify-content: flex-start !important; /* IMPORTANTE: Evita que el HUD superior se corte por el centrado */
+        padding-top: 10px;
     }
     .btn-industrial {
         padding: 12px 20px;

@@ -12,53 +12,53 @@ export const LEVELS = [
     locationIcon: '📚',
     backgroundImage: 'assets/backgrounds/level1_biblioteca.jpg',
     problems: [
-      { type: 'logic', description: 'El sistema detecta una fluctuación en el sector de la Biblioteca. Evalúe la siguiente expresión lógica.', variables: { p: false, q: true }, expression: 'p ∨ q', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: 'Cruce de circuitos detectado. Evalúe la expresión para redirigir la energía.', variables: { p: true, q: false }, expression: 'p ∧ q', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'Advertencia de sobrecarga térmica. Resuelva la negación para enfriar el sistema.', variables: { p: true }, expression: '¬p', expressionDetail: 'p = VERDADERO', expectedAnswer: false },
-      { type: 'logic', description: 'Falla en el relé principal. Analice la disyunción.', variables: { p: false, q: false }, expression: 'p ∨ q', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'Estabilización requerida en terminales B. Evalúe la conjunción.', variables: { p: true, q: true }, expression: 'p ∧ q', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true }
+      { type: 'logic', description: 'El sistema detecta una fluctuación. Resuelve si el circuito es VERDADERO o FALSO.', variables: { p: false, q: true }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: 'Cruce de circuitos detectado. Resuelve si la condición es VERDADERA o FALSA.', variables: { p: true, q: false }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
+      { type: 'logic', description: 'Advertencia de sobrecarga térmica. Resuelve la negación (lo contrario).', variables: { p: true }, expression: 'NO p (¬p)', expressionDetail: 'p = VERDADERO', expectedAnswer: false },
+      { type: 'logic', description: 'Falla en el relé principal. Analice esta opción.', variables: { p: false, q: false }, expression: 'p O q (p ∨ q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: false },
+      { type: 'logic', description: 'Estabilización requerida en terminales B. Evalúe la conjunción.', variables: { p: true, q: true }, expression: 'p Y q (p ∧ q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true }
     ]
   },
   {
     id: 2,
-    title: 'NIVEL 2: TEORÍA DE CONJUNTOS BÁSICA',
+    title: 'NIVEL 2: CONJUNTOS BÁSICOS',
     location: 'Desvío hacia Odontología',
     locationIcon: '🏥',
     backgroundImage: 'assets/backgrounds/level2_odontologia.jpg',
     problems: [
-      { type: 'venn', description: 'Se requiere redirigir la energía al sector de Odontología. Seleccione las regiones correctas.', sets: ['A', 'B'], operation: 'A ∪ B', operationDetail: 'Unión: seleccione TODAS las regiones de ambos conjuntos', expectedRegions: ['A_only', 'AB', 'B_only'] },
-      { type: 'venn', description: 'Interferencia electromagnética entre sectores. Aísle el solapamiento.', sets: ['A', 'B'], operation: 'A ∩ B', operationDetail: 'Intersección: seleccione SOLO donde se cruzan A y B', expectedRegions: ['AB'] },
-      { type: 'venn', description: 'Falla en la válvula B. Purgue el sistema B conservando A.', sets: ['A', 'B'], operation: 'A − B', operationDetail: 'Diferencia: seleccione A excluyendo cualquier parte de B', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'Falla en la válvula A. Purgue el sistema A conservando B.', sets: ['A', 'B'], operation: 'B − A', operationDetail: 'Diferencia: seleccione B excluyendo cualquier parte de A', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'Cortocircuito externo. Desvíe la energía a los nodos principales.', sets: ['A', 'B'], operation: '(A ∪ B)', operationDetail: 'Unión: seleccione TODAS las regiones', expectedRegions: ['A_only', 'AB', 'B_only'] }
+      { type: 'venn', description: 'Se requiere redirigir la energía. Toca las zonas correctas en los círculos.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona TODAS las zonas de A y de B', expectedRegions: ['A_only', 'AB', 'B_only'] },
+      { type: 'venn', description: 'Interferencia electromagnética. Aísle el solapamiento.', sets: ['A', 'B'], operation: 'A INTERSECCIÓN B (A ∩ B)', operationDetail: 'Selecciona SOLO donde se cruzan A y B', expectedRegions: ['AB'] },
+      { type: 'venn', description: 'Falla en la válvula B. Purgue B conservando A.', sets: ['A', 'B'], operation: 'A MENOS B (A − B)', operationDetail: 'Selecciona A, pero quítale la parte de B', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'Falla en la válvula A. Purgue A conservando B.', sets: ['A', 'B'], operation: 'B MENOS A (B − A)', operationDetail: 'Selecciona B, pero quítale la parte de A', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'Cortocircuito externo. Desvíe la energía a los nodos.', sets: ['A', 'B'], operation: 'A UNIÓN B (A ∪ B)', operationDetail: 'Selecciona TODAS las zonas de A y B', expectedRegions: ['A_only', 'AB', 'B_only'] }
     ]
   },
   {
     id: 3,
-    title: 'NIVEL 3: LÓGICA PROPOSICIONAL AVANZADA',
+    title: 'NIVEL 3: LÓGICA AVANZADA (DE MORGAN)',
     location: 'Leyes de Morgan',
     locationIcon: '⚙️',
     backgroundImage: 'assets/backgrounds/level3_laboratorio.jpg',
     problems: [
-      { type: 'logic', description: 'Falla crítica detectada. Aplique las Leyes de De Morgan para purgar el sistema.', variables: { p: true, q: false }, expression: '¬(p ∧ ¬q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'Anomalía en el inversor de fase. Aplique De Morgan.', variables: { p: false, q: false }, expression: '¬(p ∨ q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: true },
-      { type: 'logic', description: 'Inestabilidad cuántica en los puertos. Evalúe la negación múltiple.', variables: { p: true, q: true }, expression: '¬(¬p ∨ ¬q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: 'Desajuste en los fusibles lógicos.', variables: { p: false, q: true }, expression: '¬p ∧ q', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: 'Resonancia de ciclos. Evalúe la expresión.', variables: { p: true, q: false }, expression: '¬p ∨ q', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false }
+      { type: 'logic', description: 'Falla crítica. Toca el manual para ver la tabla de ayuda rápida si no sabes qué responder.', variables: { p: true, q: false }, expression: 'NO (p Y NO q)', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false },
+      { type: 'logic', description: 'Anomalía en el inversor. Revisa la tabla del manual.', variables: { p: false, q: false }, expression: 'NO (p O q)', expressionDetail: 'p = FALSO, q = FALSO', expectedAnswer: true },
+      { type: 'logic', description: 'Inestabilidad cuántica en los puertos. Usa la ayuda del manual.', variables: { p: true, q: true }, expression: 'NO (NO p O NO q)', expressionDetail: 'p = VERDADERO, q = VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: 'Desajuste en los fusibles lógicos.', variables: { p: false, q: true }, expression: 'NO p Y q', expressionDetail: 'p = FALSO, q = VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: 'Resonancia de ciclos. Evalúe la expresión.', variables: { p: true, q: false }, expression: 'NO p O q', expressionDetail: 'p = VERDADERO, q = FALSO', expectedAnswer: false }
     ]
   },
   {
     id: 4,
-    title: 'NIVEL 4: TEORÍA DE CONJUNTOS AVANZADA',
+    title: 'NIVEL 4: CONJUNTOS AVANZADOS',
     location: 'Colapso del Rectorado',
     locationIcon: '🏛️',
     backgroundImage: 'assets/backgrounds/level4_rectorado.jpg',
     problems: [
-      { type: 'venn', description: 'El Rectorado está al borde del colapso total. Opere el diagrama de 3 conjuntos.', sets: ['A', 'B', 'C'], operation: '(A ∩ C) − B', operationDetail: 'Intersección de A y C, excluyendo todo B', expectedRegions: ['AC_only'] },
-      { type: 'venn', description: 'Reenrutando servidores centrales.', sets: ['A', 'B', 'C'], operation: '(A ∪ B) ∩ C', operationDetail: 'La unión de A y B, pero solo donde se cruzan con C', expectedRegions: ['AC_only', 'BC_only', 'ABC'] },
-      { type: 'venn', description: 'Falla en nodo C.', sets: ['A', 'B', 'C'], operation: 'A ∩ B ∩ C', operationDetail: 'La intersección triple exacta', expectedRegions: ['ABC'] },
-      { type: 'venn', description: 'Protocolo de emergencia Delta.', sets: ['A', 'B', 'C'], operation: '(A − B) ∪ C', operationDetail: 'A excluyendo B, unido con todo C', expectedRegions: ['A_only', 'C_only', 'AC_only', 'BC_only', 'ABC'] },
-      { type: 'venn', description: 'Caída general inminente.', sets: ['A', 'B', 'C'], operation: 'C − (A ∪ B)', operationDetail: 'Solo C puro, excluyendo A y B', expectedRegions: ['C_only'] }
+      { type: 'venn', description: 'Hay 3 círculos. Lee la instrucción y ve marcando paso a paso.', sets: ['A', 'B', 'C'], operation: '(A INTERSECCIÓN C) MENOS B', operationDetail: 'Marca donde se cruzan A y C, pero quítale la zona de B', expectedRegions: ['AC_only'] },
+      { type: 'venn', description: 'Reenrutando servidores centrales.', sets: ['A', 'B', 'C'], operation: '(A UNIÓN B) INTERSECCIÓN C', operationDetail: 'La unión de A y B, pero solo en las partes que tocan a C', expectedRegions: ['AC_only', 'BC_only', 'ABC'] },
+      { type: 'venn', description: 'Falla en nodo C.', sets: ['A', 'B', 'C'], operation: 'A INTERSECCIÓN B INTERSECCIÓN C', operationDetail: 'Solo el pequeño triángulo central donde se cruzan los TRES', expectedRegions: ['ABC'] },
+      { type: 'venn', description: 'Protocolo de emergencia Delta.', sets: ['A', 'B', 'C'], operation: '(A MENOS B) UNIÓN C', operationDetail: 'Todo A (sin tocar B) más TODO el círculo C', expectedRegions: ['A_only', 'C_only', 'AC_only', 'BC_only', 'ABC'] },
+      { type: 'venn', description: 'Caída general inminente.', sets: ['A', 'B', 'C'], operation: 'C MENOS (A UNIÓN B)', operationDetail: 'Solo el círculo C puro (abajo), sin tocar A ni B', expectedRegions: ['C_only'] }
     ]
   },
   {
