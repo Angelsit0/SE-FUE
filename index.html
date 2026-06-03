@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="¿SE FUE? - Juego de supervivencia cooperativo ambientado en la planta eléctrica de la UJAP. Resuelve puzzles de lógica proposicional y teoría de conjuntos para evitar el apagón total.">
+    <meta name="keywords" content="SE FUE, UJAP, videojuego, lógica proposicional, teoría de conjuntos, supervivencia">
+    <meta name="authors" content="Angel Torres, Luis Orellana">
+    <title>¿SE FUE? — Planta Eléctrica UJAP</title>
+
+    <!-- Google Fonts: Pixel & Retro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/screens.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/manual.css">
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- CRT MONITOR OVERLAY (always on top)          -->
+    <!-- ============================================ -->
+    <div id="crt-overlay" class="crt-overlay">
+        <div class="crt-scanlines"></div>
+        <div class="crt-vignette"></div>
+        <div class="crt-flicker"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: REGISTRO / LOGIN                     -->
+    <!-- ============================================ -->
+    <div id="screen-register" class="screen active">
+        <div class="register-container">
+            <div class="register-logo">
+                <img src="assets/logo.jpg" alt="¿SE FUE? Logo" id="register-logo-img">
+            </div>
+            <div class="register-box">
+                <h2 class="register-title">IDENTIFICACIÓN DE OPERARIO</h2>
+                <p class="register-subtitle">Ingrese sus credenciales para acceder al sistema</p>
+
+                <div id="register-form-container">
+                    <!-- Tab buttons -->
+                    <div class="register-tabs">
+                        <button id="tab-login" class="tab-btn active" data-tab="login">ACCEDER</button>
+                        <button id="tab-register" class="tab-btn" data-tab="register">REGISTRARSE</button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="login-form" class="auth-form active">
+                        <div class="input-group">
+                            <label for="login-username">CÓDIGO DE OPERARIO</label>
+                            <input type="text" id="login-username" placeholder="Ingrese su nombre de usuario" autocomplete="username" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="login-password">CLAVE DE ACCESO</label>
+                            <input type="password" id="login-password" placeholder="Ingrese su contraseña" autocomplete="current-password" required>
+                        </div>
+                        <div id="login-error" class="auth-error"></div>
+                        <button type="submit" id="btn-login" class="btn-industrial btn-primary">
+                            <span class="btn-icon">⚡</span> INICIAR SESIÓN
+                        </button>
+                    </form>
+
+                    <!-- Register Form -->
+                    <form id="register-form" class="auth-form">
+                        <div class="input-group">
+                            <label for="register-name">NOMBRE COMPLETO</label>
+                            <input type="text" id="register-name" placeholder="Ej: Angel Torres" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="register-username">CÓDIGO DE OPERARIO</label>
+                            <input type="text" id="register-username" placeholder="Nombre de usuario único" autocomplete="username" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="register-password">CLAVE DE ACCESO</label>
+                            <input type="password" id="register-password" placeholder="Mínimo 4 caracteres" autocomplete="new-password" required>
+                        </div>
+                        <div id="register-error" class="auth-error"></div>
+                        <button type="submit" id="btn-register" class="btn-industrial btn-primary">
+                            <span class="btn-icon">📋</span> REGISTRAR OPERARIO
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Admin access link -->
+                <button id="btn-admin-access" class="btn-admin-link">🔒 Acceso Administrativo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: PANTALLA DE INICIO / MENÚ            -->
+    <!-- ============================================ -->
+    <div id="screen-title" class="screen">
+        <div class="title-background">
+            <img src="assets/backgrounds/title_bg.jpg" alt="UJAP Background" class="title-bg-img">
+            <div class="title-bg-overlay"></div>
+        </div>
+
+        <div class="title-content">
+            <div class="title-logo-container">
+                <img src="assets/logo_wall.jpg" alt="¿SE FUE? Logo" id="title-logo" class="title-logo">
+            </div>
+
+            <div class="title-menu">
+                <button id="btn-iniciar" class="btn-industrial btn-neon btn-large">
+                    <span class="btn-icon">⚡</span> INICIAR MISIÓN
+                </button>
+                <button id="btn-manual" class="btn-industrial btn-neon">
+                    <span class="btn-icon">📖</span> MANUAL DEL OPERARIO
+                </button>
+                <button id="btn-leaderboard" class="btn-industrial btn-neon">
+                    <span class="btn-icon">🏆</span> TABLA DE RANGO
+                </button>
+                <button id="btn-logout" class="btn-industrial btn-neon btn-small">
+                    <span class="btn-icon">🚪</span> CERRAR SESIÓN
+                </button>
+            </div>
+
+            <div id="title-user-info" class="title-user-info">
+                <span class="user-badge">OPERARIO:</span>
+                <span id="title-username" class="user-name"></span>
+            </div>
+
+            <div class="title-credits">
+                <p>Dirigido por <strong>Angel Torres</strong> &amp; <strong>Luis Orellana</strong></p>
+                <p class="credits-sub">Universidad José Antonio Páez — UJAP</p>
+            </div>
+        </div>
+
+        <!-- Spark particles canvas -->
+        <canvas id="sparks-canvas" class="sparks-canvas"></canvas>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: JUEGO PRINCIPAL                      -->
+    <!-- ============================================ -->
+    <div id="screen-game" class="screen">
+        <!-- Game Background -->
+        <div id="game-background" class="game-background">
+            <img id="game-bg-img" src="" alt="" class="game-bg-img">
+            <div class="game-bg-overlay"></div>
+        </div>
+
+        <!-- HUD Superior -->
+        <div id="game-hud" class="game-hud">
+            <div class="hud-section hud-level">
+                <span class="hud-label">SECTOR</span>
+                <span id="hud-level" class="hud-value">1/4</span>
+            </div>
+            <div class="hud-section hud-timer-section">
+                <span class="hud-label">TIEMPO RESTANTE</span>
+                <div class="timer-display">
+                    <span id="hud-timer" class="hud-timer">05:00</span>
+                </div>
+                <div id="timer-bar" class="timer-bar">
+                    <div id="timer-bar-fill" class="timer-bar-fill"></div>
+                </div>
+            </div>
+            <div class="hud-section hud-score-section">
+                <span class="hud-label">ENERGÍA (PTS)</span>
+                <span id="hud-score" class="hud-value hud-score">0</span>
+            </div>
+        </div>
+
+        <!-- Panel Central: Área del Problema -->
+        <div id="game-panel" class="game-panel">
+            <!-- Level Location Header -->
+            <div id="game-location" class="game-location">
+                <span class="location-icon">📍</span>
+                <span id="game-location-text" class="location-text">Biblioteca</span>
+            </div>
+
+            <!-- Problem Description -->
+            <div id="game-problem" class="game-problem">
+                <h2 id="problem-title" class="problem-title"></h2>
+                <div id="problem-description" class="problem-description"></div>
+                <div id="problem-expression" class="problem-expression"></div>
+            </div>
+
+            <!-- Logic Controls (Levels 1, 3) -->
+            <div id="logic-controls" class="game-controls logic-controls">
+                <div class="logic-variables" id="logic-variables"></div>
+                <div class="logic-buttons">
+                    <button id="btn-verdadero" class="btn-industrial btn-logic btn-verdadero">
+                        <span class="btn-label">VERDADERO</span>
+                        <span class="btn-sublabel">Energía</span>
+                    </button>
+                    <button id="btn-falso" class="btn-industrial btn-logic btn-falso">
+                        <span class="btn-label">FALSO</span>
+                        <span class="btn-sublabel">Purga</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Venn Diagram Controls (Levels 2, 4) -->
+            <div id="venn-controls" class="game-controls venn-controls">
+                <div id="venn-container" class="venn-container">
+                    <svg id="venn-svg" viewBox="0 0 500 400" class="venn-svg"></svg>
+                </div>
+                <div class="venn-actions">
+                    <button id="btn-reset-venn" class="btn-industrial btn-small">
+                        <span class="btn-icon">🔄</span> REINICIAR
+                    </button>
+                    <button id="btn-confirmar" class="btn-industrial btn-confirm">
+                        <span class="btn-icon">⚡</span> CONFIRMAR SELECCIÓN
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Overlay -->
+        <div id="feedback-overlay" class="feedback-overlay">
+            <div id="feedback-text" class="feedback-text"></div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: MANUAL DEL OPERARIO                  -->
+    <!-- ============================================ -->
+    <div id="screen-manual" class="screen">
+        <div class="manual-container">
+            <div class="manual-paper">
+                <div class="manual-edge manual-edge-top"></div>
+                <div class="manual-edge manual-edge-bottom"></div>
+                <div class="manual-edge manual-edge-left"></div>
+                <div class="manual-edge manual-edge-right"></div>
+
+                <div id="manual-pages" class="manual-pages">
+                    <!-- Page 1: Cover -->
+                    <div class="manual-page active" data-page="1">
+                        <div class="manual-stamp">CONFIDENCIAL</div>
+                        <h1 class="manual-main-title">MANUAL DEL OPERARIO</h1>
+                        <h2 class="manual-subtitle">Planta Eléctrica — UJAP</h2>
+                        <div class="manual-divider">═══════════════════</div>
+                        <p class="manual-intro">Este documento contiene las instrucciones necesarias para operar el panel de control de emergencia. En caso de falla crítica del sistema, el operario deberá resolver las secuencias lógicas para restaurar la energía antes del apagón total.</p>
+                        <div class="manual-warning-box">
+                            <p>⚠️ ADVERTENCIA: El tiempo es limitado. Cada error reduce el margen de operación en 20 segundos. Cada acierto estabiliza el sistema y añade 15 segundos.</p>
+                        </div>
+                        <p class="manual-footer-note">Documento aprobado por la Dirección de Ingeniería — UJAP</p>
+                    </div>
+
+                    <!-- Page 2: Lógica Proposicional -->
+                    <div class="manual-page" data-page="2">
+                        <h2 class="manual-page-title">CAPÍTULO I: LÓGICA PROPOSICIONAL</h2>
+                        <div class="manual-divider">───────────────────</div>
+                        <p>Una <strong>proposición</strong> es una afirmación que puede ser <strong>VERDADERA (V)</strong> o <strong>FALSA (F)</strong>.</p>
+                        <h3>Operadores Lógicos:</h3>
+                        <div class="manual-table">
+                            <table>
+                                <thead>
+                                    <tr><th>Símbolo</th><th>Nombre</th><th>Significado</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>∧</td><td>Conjunción (Y)</td><td>Ambos deben ser verdaderos</td></tr>
+                                    <tr><td>∨</td><td>Disyunción (O)</td><td>Al menos uno verdadero</td></tr>
+                                    <tr><td>¬</td><td>Negación (NO)</td><td>Invierte el valor</td></tr>
+                                    <tr><td>→</td><td>Implicación</td><td>Si...entonces</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h3>Ejemplo:</h3>
+                        <p>Si <strong>p = Falso</strong> y <strong>q = Verdadero</strong>:</p>
+                        <p class="manual-example">p ∨ q = F ∨ V = <strong>VERDADERO</strong></p>
+                        <p class="manual-tip">💡 Recuerda: La disyunción (∨) solo es FALSA cuando AMBOS valores son falsos.</p>
+                    </div>
+
+                    <!-- Page 3: Tabla de Verdad -->
+                    <div class="manual-page" data-page="3">
+                        <h2 class="manual-page-title">CAPÍTULO II: TABLAS DE VERDAD</h2>
+                        <div class="manual-divider">───────────────────</div>
+                        <h3>Tabla de Verdad — Conjunción (∧) y Disyunción (∨)</h3>
+                        <div class="manual-table">
+                            <table>
+                                <thead>
+                                    <tr><th>p</th><th>q</th><th>p ∧ q</th><th>p ∨ q</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+                                    <tr><td>V</td><td>F</td><td>F</td><td>V</td></tr>
+                                    <tr><td>F</td><td>V</td><td>F</td><td>V</td></tr>
+                                    <tr><td>F</td><td>F</td><td>F</td><td>F</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h3>Tabla de Verdad — Negación (¬)</h3>
+                        <div class="manual-table">
+                            <table>
+                                <thead><tr><th>p</th><th>¬p</th></tr></thead>
+                                <tbody>
+                                    <tr><td>V</td><td>F</td></tr>
+                                    <tr><td>F</td><td>V</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="manual-tip">💡 Consejo: Cuando tengas una expresión compleja, resuélvela desde los paréntesis internos hacia afuera, paso a paso.</p>
+                    </div>
+
+                    <!-- Page 4: Leyes de De Morgan -->
+                    <div class="manual-page" data-page="4">
+                        <h2 class="manual-page-title">CAPÍTULO III: LEYES DE DE MORGAN</h2>
+                        <div class="manual-divider">───────────────────</div>
+                        <p>Las <strong>Leyes de De Morgan</strong> son reglas fundamentales para simplificar expresiones con negaciones:</p>
+                        <div class="manual-formula-box">
+                            <p class="formula">¬(p ∧ q) = ¬p ∨ ¬q</p>
+                            <p class="formula">¬(p ∨ q) = ¬p ∧ ¬q</p>
+                        </div>
+                        <h3>Ejemplo Resuelto Paso a Paso:</h3>
+                        <p>Evaluar: <strong>¬(p ∧ ¬q)</strong> donde p = V, q = F</p>
+                        <div class="manual-steps">
+                            <p>Paso 1: ¬q = ¬F = <strong>V</strong></p>
+                            <p>Paso 2: p ∧ ¬q = V ∧ V = <strong>V</strong></p>
+                            <p>Paso 3: ¬(V) = <strong>F</strong></p>
+                        </div>
+                        <p class="manual-result">Resultado: <strong>FALSO</strong></p>
+                        <p class="manual-tip">💡 La clave: primero resuelve lo de adentro, luego niega todo el resultado.</p>
+                    </div>
+
+                    <!-- Page 5: Teoría de Conjuntos -->
+                    <div class="manual-page" data-page="5">
+                        <h2 class="manual-page-title">CAPÍTULO IV: TEORÍA DE CONJUNTOS</h2>
+                        <div class="manual-divider">───────────────────</div>
+                        <p>Un <strong>conjunto</strong> es una colección de elementos. Las operaciones básicas son:</p>
+                        <div class="manual-table">
+                            <table>
+                                <thead>
+                                    <tr><th>Símbolo</th><th>Operación</th><th>Significado</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>A ∪ B</td><td>Unión</td><td>Todo lo que está en A, en B, o en ambos</td></tr>
+                                    <tr><td>A ∩ B</td><td>Intersección</td><td>Solo lo que está en ambos conjuntos</td></tr>
+                                    <tr><td>A − B</td><td>Diferencia</td><td>Lo que está en A pero NO en B</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h3>Cómo usar los Diagramas de Venn:</h3>
+                        <p>Los diagramas muestran los conjuntos como círculos que se superponen. Debes <strong>hacer clic</strong> en las regiones correctas según la operación solicitada y luego <strong>confirmar</strong>.</p>
+                        <p class="manual-tip">💡 Para A ∪ B: ilumina TODAS las partes de ambos círculos (incluyendo la intersección).</p>
+                    </div>
+
+                    <!-- Page 6: Diagramas de Venn Avanzados -->
+                    <div class="manual-page" data-page="6">
+                        <h2 class="manual-page-title">CAPÍTULO V: CONJUNTOS AVANZADOS</h2>
+                        <div class="manual-divider">───────────────────</div>
+                        <h3>Operaciones Compuestas:</h3>
+                        <p>Expresión: <strong>(A ∩ C) − B</strong></p>
+                        <div class="manual-steps">
+                            <p>Paso 1: Encuentra A ∩ C (donde se cruzan A y C)</p>
+                            <p>Paso 2: De ese resultado, EXCLUYE todo lo que también esté en B</p>
+                            <p>Paso 3: Ilumina SOLO la región resultante</p>
+                        </div>
+                        <p class="manual-tip">💡 Es la parte donde A y C se superponen, PERO que NO toca a B.</p>
+                        <h3>Tips Generales:</h3>
+                        <div class="manual-warning-box">
+                            <p>🔧 Cada respuesta correcta suma +500 puntos y +15 segundos</p>
+                            <p>⚠️ Cada error resta −20 segundos del reloj</p>
+                            <p>💀 Si el tiempo llega a cero: SE FUE</p>
+                            <p>🏆 Completa los 4 niveles para ganar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Navigation -->
+                <div class="manual-nav">
+                    <button id="manual-prev" class="btn-manual-nav">◄ ANTERIOR</button>
+                    <span id="manual-page-num" class="manual-page-counter">1 / 6</span>
+                    <button id="manual-next" class="btn-manual-nav">SIGUIENTE ►</button>
+                </div>
+                <button id="btn-manual-close" class="btn-industrial btn-small btn-manual-close">✕ CERRAR MANUAL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: LEADERBOARD                          -->
+    <!-- ============================================ -->
+    <div id="screen-leaderboard" class="screen">
+        <div class="leaderboard-container">
+            <div class="terminal-frame">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">SISTEMA DE CLASIFICACIÓN — PLANTA UJAP</span>
+                </div>
+                <div class="terminal-body">
+                    <pre class="terminal-ascii">
+╔══════════════════════════════════════════╗
+║       🏆 TABLA DE RANGO — TOP 3 🏆      ║
+╚══════════════════════════════════════════╝
+                    </pre>
+                    <div id="leaderboard-entries" class="leaderboard-entries">
+                        <div class="leaderboard-empty">
+                            <p>> Sin registros en el sistema...</p>
+                            <p>> Esperando primer operario...</p>
+                            <p class="blink">_</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="btn-leaderboard-back" class="btn-industrial btn-neon btn-small">
+                <span class="btn-icon">◄</span> VOLVER AL MENÚ
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: GAME OVER                            -->
+    <!-- ============================================ -->
+    <div id="screen-gameover" class="screen">
+        <div class="gameover-container">
+            <div id="gameover-blackout" class="gameover-blackout"></div>
+            <h1 id="gameover-text" class="gameover-text glitch" data-text="SE FUE">SE FUE</h1>
+            <div class="gameover-info">
+                <p class="gameover-subtitle">El apagón es total. La planta ha colapsado.</p>
+                <p class="gameover-score-label">PUNTUACIÓN FINAL</p>
+                <p id="gameover-score" class="gameover-score">0</p>
+            </div>
+            <div class="gameover-actions">
+                <button id="btn-gameover-retry" class="btn-industrial btn-neon btn-large">
+                    <span class="btn-icon">🔄</span> REINTENTAR
+                </button>
+                <button id="btn-gameover-menu" class="btn-industrial btn-neon">
+                    <span class="btn-icon">🏠</span> MENÚ PRINCIPAL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: VICTORIA                             -->
+    <!-- ============================================ -->
+    <div id="screen-victory" class="screen">
+        <div class="victory-container">
+            <div class="victory-glow"></div>
+            <h1 class="victory-title">⚡ ENERGÍA RESTAURADA ⚡</h1>
+            <h2 class="victory-subtitle">¡Misión Completada, Operario!</h2>
+            <div class="victory-info">
+                <p class="victory-score-label">PUNTUACIÓN FINAL</p>
+                <p id="victory-score" class="victory-score">0</p>
+                <p id="victory-time" class="victory-time">Tiempo restante: 00:00</p>
+            </div>
+            <div class="victory-actions">
+                <button id="btn-victory-menu" class="btn-industrial btn-neon btn-large">
+                    <span class="btn-icon">🏠</span> MENÚ PRINCIPAL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: PANEL ADMINISTRATIVO                 -->
+    <!-- ============================================ -->
+    <div id="screen-admin" class="screen">
+        <div class="admin-container">
+            <!-- Admin Login -->
+            <div id="admin-login" class="admin-login">
+                <div class="terminal-frame">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">ACCESO ADMINISTRATIVO</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="terminal-text">> Ingrese credenciales de administrador...</p>
+                        <div class="input-group">
+                            <label for="admin-password">CONTRASEÑA MAESTRA</label>
+                            <input type="password" id="admin-password" placeholder="••••••••">
+                        </div>
+                        <div id="admin-login-error" class="auth-error"></div>
+                        <button id="btn-admin-login" class="btn-industrial btn-primary">
+                            <span class="btn-icon">🔓</span> ACCEDER
+                        </button>
+                        <button id="btn-admin-back-login" class="btn-industrial btn-small">◄ VOLVER</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Panel -->
+            <div id="admin-panel" class="admin-panel" style="display:none;">
+                <div class="admin-header">
+                    <h2 class="admin-title">🔧 PANEL DE CONTROL ADMINISTRATIVO</h2>
+                    <button id="btn-admin-back" class="btn-industrial btn-small">◄ CERRAR SESIÓN</button>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-admin-tab="users">👥 OPERARIOS</button>
+                    <button class="admin-tab" data-admin-tab="scores">🏆 PUNTUACIONES</button>
+                </div>
+
+                <!-- Users Tab -->
+                <div id="admin-users-tab" class="admin-tab-content active">
+                    <div class="admin-table-container">
+                        <table id="admin-users-table" class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha Registro</th>
+                                    <th>Partidas</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Scores Tab -->
+                <div id="admin-scores-tab" class="admin-tab-content">
+                    <div class="admin-table-container">
+                        <table id="admin-scores-table" class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Operario</th>
+                                    <th>Puntuación</th>
+                                    <th>Nivel Alcanzado</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-scores-list"></tbody>
+                        </table>
+                    </div>
+                    <button id="btn-clear-scores" class="btn-industrial btn-danger">
+                        <span class="btn-icon">🗑️</span> BORRAR TODAS LAS PUNTUACIONES
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MODAL: CONFIRMACIÓN DOBLE                    -->
+    <!-- ============================================ -->
+    <div id="confirm-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-warning">⚠️</div>
+            <h3 id="modal-title" class="modal-title">¿ESTÁ SEGURO?</h3>
+            <p id="modal-message" class="modal-message">Esta acción no se puede deshacer.</p>
+            <div class="modal-step" id="modal-step-1">
+                <p class="modal-step-label">PRIMERA CONFIRMACIÓN</p>
+                <div class="modal-buttons">
+                    <button id="btn-modal-cancel" class="btn-industrial btn-small">CANCELAR</button>
+                    <button id="btn-modal-confirm1" class="btn-industrial btn-danger">SÍ, CONTINUAR</button>
+                </div>
+            </div>
+            <div class="modal-step" id="modal-step-2" style="display:none;">
+                <p class="modal-step-label">SEGUNDA CONFIRMACIÓN — ESCRIBA "CONFIRMAR"</p>
+                <input type="text" id="modal-confirm-input" placeholder='Escriba "CONFIRMAR"'>
+                <div class="modal-buttons">
+                    <button id="btn-modal-cancel2" class="btn-industrial btn-small">CANCELAR</button>
+                    <button id="btn-modal-confirm2" class="btn-industrial btn-danger">ELIMINAR DEFINITIVAMENTE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS (ES6 Modules)                        -->
+    <!-- ============================================ -->
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

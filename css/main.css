@@ -1,0 +1,381 @@
+/* ============================================
+   main.css — Design System & Global Styles
+   ============================================ */
+
+/* CSS Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* CSS Variables: Design Tokens */
+:root {
+    --neon-cyan: #ff3333;
+    --neon-yellow: #ffcc00;
+    --danger-red: #ff3333;
+    --success-green: #00ff66;
+    --bg-darkest: #0a0a0a;
+    --bg-dark: #111111;
+    --bg-medium: #1a1a1a;
+    --bg-light: #2a2a2a;
+    --text-primary: #e0e0e0;
+    --text-bright: #ffffff;
+    --font-heading: 'Press Start 2P', monospace;
+    --font-body: 'VT323', monospace;
+    --font-handwritten: 'Special Elite', cursive;
+}
+
+body {
+    background-color: var(--bg-darkest);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 20px;
+    overflow: hidden; /* Prevent scrolling, app-like feel */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Base screen layout */
+.screen {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 1;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================
+   CRT MONITOR EFFECT
+   ============================================ */
+#crt-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.crt-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+    );
+    background-size: 100% 4px;
+}
+
+.crt-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.crt-flicker {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.02);
+    animation: flicker 0.15s infinite;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-industrial {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    padding: 15px 30px;
+    border: 2px solid;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    font-size: 1.2em;
+}
+
+.btn-neon {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(255,51,51,0.2);
+}
+
+.btn-neon:hover {
+    background: rgba(255,51,51,0.1);
+    box-shadow: 0 0 20px rgba(255,51,51,0.4);
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.btn-primary {
+    background: var(--neon-cyan);
+    color: var(--bg-darkest);
+    border-color: var(--neon-cyan);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 30px rgba(255,51,51,0.5);
+    background: #33f3ff;
+}
+
+.btn-danger {
+    background: var(--danger-red);
+    color: white;
+    border-color: var(--danger-red);
+}
+
+.btn-danger:hover {
+    box-shadow: 0 0 20px rgba(255,51,51,0.5);
+    background: #ff4d4d;
+}
+
+.btn-large {
+    font-size: 14px;
+    padding: 20px 40px;
+}
+
+.btn-small {
+    font-size: 10px;
+    padding: 10px 20px;
+}
+
+/* Shine effect on hover */
+.btn-industrial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+.btn-industrial:hover::before {
+    animation: shine 0.6s;
+}
+
+/* ============================================
+   FORMS & INPUTS
+   ============================================ */
+.input-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.input-group label {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    color: var(--neon-cyan);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-medium);
+    border: 1px solid var(--bg-light);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 20px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(255,51,51,0.2);
+    background: var(--bg-light);
+}
+
+.auth-error {
+    color: var(--danger-red);
+    font-size: 16px;
+    min-height: 20px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    background: var(--bg-dark);
+    border: 2px solid var(--danger-red);
+    padding: 30px;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255,51,51,0.3);
+}
+
+.modal-warning {
+    font-size: 48px;
+    margin-bottom: 15px;
+    animation: pulse 1s infinite alternate;
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    color: var(--danger-red);
+    margin-bottom: 15px;
+}
+
+.modal-message {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.modal-step-label {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    color: var(--neon-yellow);
+    margin-bottom: 10px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+#modal-confirm-input {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background: var(--bg-medium);
+    border: 1px solid var(--bg-light);
+    color: var(--text-bright);
+    font-family: var(--font-body);
+    font-size: 20px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.97; }
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+@keyframes neonPulse {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px var(--neon-cyan)); }
+    50% { opacity: 0.8; filter: drop-shadow(0 0 5px var(--neon-cyan)); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Glitch effect on text */
+.glitch {
+    position: relative;
+    color: var(--text-bright);
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-darkest);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--neon-cyan);
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--danger-red);
+    clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip-path: polygon(0 20%, 100% 20%, 100% 30%, 0 30%); transform: translate(-2px, 1px); }
+    20% { clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%); transform: translate(2px, -1px); }
+    40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(-1px, 2px); }
+    60% { clip-path: polygon(0 80%, 100% 80%, 100% 85%, 0 85%); transform: translate(1px, -2px); }
+    80% { clip-path: polygon(0 30%, 100% 30%, 100% 40%, 0 40%); transform: translate(-2px, 1px); }
+    100% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); transform: translate(2px, -1px); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip-path: polygon(0 10%, 100% 10%, 100% 15%, 0 15%); transform: translate(1px, -2px); }
+    20% { clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%); transform: translate(-2px, 1px); }
+    40% { clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%); transform: translate(2px, -1px); }
+    60% { clip-path: polygon(0 20%, 100% 20%, 100% 30%, 0 30%); transform: translate(-1px, 2px); }
+    80% { clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0 100%); transform: translate(2px, -1px); }
+    100% { clip-path: polygon(0 60%, 100% 60%, 100% 70%, 0 70%); transform: translate(-2px, 1px); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-darkest);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--bg-light);
+    border: 1px solid var(--bg-dark);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-cyan);
+}
+
+::selection {
+    background: var(--neon-cyan);
+    color: var(--bg-darkest);
+}
