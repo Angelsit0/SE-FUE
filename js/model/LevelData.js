@@ -11,6 +11,7 @@ export const LEVELS = [
     location: 'Parpadeo en la Biblioteca',
     locationIcon: '📚',
     backgroundImage: 'assets/backgrounds/level1_biblioteca.jpg',
+    problems: [
       { type: 'logic', description: 'PREGUNTA L1-A: Si A es FALSO y B es VERDADERO. ¿"A o B" es verdadero?', variables: { p: false, q: true }, expression: 'A o B', expressionDetail: 'A=FALSO, B=VERDADERO', expectedAnswer: true },
       { type: 'logic', description: 'PREGUNTA L1-B: Si A es VERDADERO y B es FALSO. ¿"A y B" es verdadero?', variables: { p: true, q: false }, expression: 'A y B', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: false },
       { type: 'logic', description: 'PREGUNTA L1-C: Si A es VERDADERO. ¿Lo contrario de A (NO A) es verdadero?', variables: { p: true }, expression: 'NO A', expressionDetail: 'A=VERDADERO', expectedAnswer: false },
