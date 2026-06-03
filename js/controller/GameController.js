@@ -334,6 +334,8 @@ export class GameController {
         shuffledLeft.forEach((color) => {
             const node = document.createElement('div');
             node.className = 'wire-node';
+            node.style.backgroundColor = color;
+            node.style.borderColor = color;
             node.style.color = color;
             node.dataset.color = color;
             node.dataset.side = 'left';
@@ -352,6 +354,8 @@ export class GameController {
         shuffledRight.forEach((color) => {
             const node = document.createElement('div');
             node.className = 'wire-node';
+            node.style.backgroundColor = color;
+            node.style.borderColor = color;
             node.style.color = color;
             node.dataset.color = color;
             node.dataset.side = 'right';

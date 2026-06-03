@@ -25,11 +25,11 @@ export const LEVELS = [
     locationIcon: '🏥',
     backgroundImage: 'assets/backgrounds/level2_odontologia.jpg',
     problems: [
-      { type: 'venn', description: 'PREGUNTA L2-A: Toca SOLO la media luna izquierda de A (A sin B).', sets: ['A', 'B'], operation: 'A MENOS B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-B: Toca SOLO el centro donde se cruzan A y B.', sets: ['A', 'B'], operation: 'INTERSECCIÓN (A ∩ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AB'] },
-      { type: 'venn', description: 'PREGUNTA L2-C: Toca SOLO la media luna derecha de B (B sin A).', sets: ['A', 'B'], operation: 'B MENOS A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-D: Toca TODO, los dos círculos completos (las 3 partes).', sets: ['A', 'B'], operation: 'UNIÓN (A ∪ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'AB', 'B_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-E: Toca SOLO el centro donde se cruzan A y B.', sets: ['A', 'B'], operation: 'INTERSECCIÓN (A ∩ B)', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AB'] }
+      { type: 'venn', description: 'PREGUNTA L2-A: Pinta TODO el círculo A. (Haz 1 solo clic en la media luna izquierda).', sets: ['A', 'B'], operation: 'Pintar A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-B: Pinta TODO el círculo B. (Haz 1 solo clic en la media luna derecha).', sets: ['A', 'B'], operation: 'Pintar B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-C: Pinta TODO el círculo A. (Haz 1 solo clic en la media luna izquierda).', sets: ['A', 'B'], operation: 'Pintar A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-D: Pinta TODO el círculo B. (Haz 1 solo clic en la media luna derecha).', sets: ['A', 'B'], operation: 'Pintar B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-E: Pinta TODO el círculo A. (Haz 1 solo clic en la media luna izquierda).', sets: ['A', 'B'], operation: 'Pintar A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] }
     ]
   },
   {
@@ -53,11 +53,11 @@ export const LEVELS = [
     locationIcon: '🏛️',
     backgroundImage: 'assets/backgrounds/level4_rectorado.jpg',
     problems: [
-      { type: 'venn', description: 'PREGUNTA L4-A: Toca ÚNICAMENTE el triángulo del centro (donde se cruzan los 3).', sets: ['A', 'B', 'C'], operation: 'Solo el Centro (ABC)', operationDetail: 'Toca 1 sola zona', expectedRegions: ['ABC'] },
-      { type: 'venn', description: 'PREGUNTA L4-B: Toca ÚNICAMENTE la zona exterior de A (arriba izquierda) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo A Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-C: Toca ÚNICAMENTE la zona exterior de B (arriba derecha) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo B Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-D: Toca ÚNICAMENTE la zona exterior de C (abajo al centro) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo C Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['C_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-E: Toca ÚNICAMENTE donde se cruzan A y B (arriba al medio), sin tocar a C.', sets: ['A', 'B', 'C'], operation: 'Cruce A y B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['AB_only'] }
+      { type: 'venn', description: 'PREGUNTA L4-A: Pinta TODO el círculo A. (Haz 1 solo clic en la luna de arriba a la izquierda).', sets: ['A', 'B', 'C'], operation: 'Pintar A', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-B: Pinta TODO el círculo B. (Haz 1 solo clic en la luna de arriba a la derecha).', sets: ['A', 'B', 'C'], operation: 'Pintar B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-C: Pinta TODO el círculo C. (Haz 1 solo clic en la luna de abajo al centro).', sets: ['A', 'B', 'C'], operation: 'Pintar C', operationDetail: 'Toca 1 sola zona', expectedRegions: ['C_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-D: Pinta TODO el círculo A. (Haz 1 solo clic en la luna de arriba a la izquierda).', sets: ['A', 'B', 'C'], operation: 'Pintar A', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-E: Pinta TODO el círculo B. (Haz 1 solo clic en la luna de arriba a la derecha).', sets: ['A', 'B', 'C'], operation: 'Pintar B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] }
     ]
   },
   {
