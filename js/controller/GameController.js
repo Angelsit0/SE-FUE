@@ -320,8 +320,11 @@ export class GameController {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }, 50);
 
-        const shuffledLeft = [...problem.colors].sort(() => Math.random() - 0.5);
-        const shuffledRight = [...problem.colors].sort(() => Math.random() - 0.5);
+        const leftColorsArray = problem.colorsLeft || problem.colors;
+        const rightColorsArray = problem.colorsRight || problem.colors;
+        
+        const shuffledLeft = [...leftColorsArray].sort(() => Math.random() - 0.5);
+        const shuffledRight = [...rightColorsArray].sort(() => Math.random() - 0.5);
 
         this._wireConnections = [];
         let selectedLeftNode = null;
@@ -336,7 +339,7 @@ export class GameController {
             node.dataset.side = 'left';
             node.addEventListener('click', () => {
                 if (gameState.gameStatus !== 'playing') return;
-                if (this._wireConnections.includes(color)) return;
+                if (this._wireConnections.find(conn => conn.left === color)) return;
                 this.audio.playClick();
                 if (selectedLeftNode) selectedLeftNode.classList.remove('selected');
                 selectedLeftNode = node;
@@ -354,18 +357,21 @@ export class GameController {
             node.dataset.side = 'right';
             node.addEventListener('click', () => {
                 if (gameState.gameStatus !== 'playing') return;
-                if (this._wireConnections.includes(color)) return;
+                if (this._wireConnections.find(conn => conn.right === color)) return;
                 if (!selectedLeftNode) return;
                 this.audio.playClick();
                 
                 const leftColor = selectedLeftNode.dataset.color;
-                if (leftColor === color) {
-                    this._wireConnections.push(color);
+                const expectedRightColor = problem.solutionMap ? problem.solutionMap[leftColor] : leftColor;
+                
+                if (expectedRightColor === color) {
+                    this._wireConnections.push({ left: leftColor, right: color });
                     selectedLeftNode.classList.remove('selected');
                     selectedLeftNode = null;
                     this._drawWireConnections();
                     
-                    if (this._wireConnections.length === problem.colors.length) {
+                    const totalConnectionsNeeded = problem.colorsLeft ? problem.colorsLeft.length : problem.colors.length;
+                    if (this._wireConnections.length === totalConnectionsNeeded) {
                         this._processAnswer(true);
                     }
                 } else {
@@ -388,9 +394,13 @@ export class GameController {
         ctx.lineWidth = 6;
         ctx.lineCap = 'round';
 
-        this._wireConnections.forEach(color => {
-            const leftNode = this._wireNodesLeft.find(n => n.dataset.color === color);
-            const rightNode = this._wireNodesRight.find(n => n.dataset.color === color);
+        this._wireConnections.forEach(conn => {
+            const leftColor = conn.left;
+            const rightColor = conn.right;
+            
+            const leftNode = this._wireNodesLeft.find(n => n.dataset.color === leftColor);
+            const rightNode = this._wireNodesRight.find(n => n.dataset.color === rightColor);
+            
             if (leftNode && rightNode) {
                 const lRect = leftNode.getBoundingClientRect();
                 const rRect = rightNode.getBoundingClientRect();
@@ -401,7 +411,7 @@ export class GameController {
                 const x2 = (rRect.left - bRect.left) + rRect.width / 2;
                 const y2 = (rRect.top - bRect.top) + rRect.height / 2;
 
-                ctx.strokeStyle = color;
+                ctx.strokeStyle = leftColor;
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
                 ctx.bezierCurveTo(x1 + 100, y1, x2 - 100, y2, x2, y2);

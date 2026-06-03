@@ -68,8 +68,20 @@ export const LEVELS = [
     locationIcon: '🔌',
     backgroundImage: 'assets/backgrounds/level4_rectorado.jpg', // Usar la misma o añadir otra luego
     problems: [
-      { type: 'wires-connect', description: 'Los cables de datos principales se han desconectado. Empalme los terminales del mismo color.', colors: ['red', 'blue', 'yellow', 'green'] },
-      { type: 'wires-connect', description: 'Falla en el bus de transmisión. Reconecte los filamentos energéticos.', colors: ['cyan', 'magenta', 'lime', 'orange'] },
+      { 
+        type: 'wires-connect', 
+        description: '[CÓDIGO L5-A] Busca este código en la PÁGINA 6 del manual para saber qué color va con cuál.', 
+        colorsLeft: ['red', 'blue', 'yellow', 'green'],
+        colorsRight: ['green', 'yellow', 'red', 'blue'],
+        solutionMap: { 'red': 'green', 'blue': 'yellow', 'yellow': 'red', 'green': 'blue' }
+      },
+      { 
+        type: 'wires-connect', 
+        description: '[CÓDIGO L5-B] Busca este código en la PÁGINA 6 del manual para saber el orden correcto.', 
+        colorsLeft: ['cyan', 'magenta', 'lime', 'orange'],
+        colorsRight: ['orange', 'cyan', 'magenta', 'lime'],
+        solutionMap: { 'cyan': 'orange', 'magenta': 'cyan', 'lime': 'magenta', 'orange': 'lime' }
+      },
       { type: 'wires-cut', description: 'Sobrecarga inminente. Lea el protocolo en el MANUAL (Capítulo VII) para cortar el cable correcto.', wires: ['red', 'blue', 'green', 'yellow'], conditions: { location: 'Cuarto de Generadores' } },
       { type: 'wires-cut', description: 'Detección de corto circuito. Lea el protocolo en el MANUAL para cortar el cable correcto.', wires: ['black', 'red', 'red', 'blue'], conditions: { location: 'Cuarto de Generadores' } }
     ]
