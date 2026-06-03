@@ -14,6 +14,7 @@ export class InputController {
      */
     init(callbacks) {
         const {
+            onWaitStart,
             onVerdadero,
             onFalso,
             onConfirmVenn,
@@ -50,6 +51,20 @@ export class InputController {
 
         this._bind('btn-reset-venn', 'click', () => {
             if (onResetVenn) onResetVenn();
+        });
+
+        // ─── Pantalla Espera ───
+        this._bind('btn-start-game', 'click', () => {
+            if (onWaitStart) onWaitStart();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const waitScreen = document.getElementById('screen-wait');
+                if (waitScreen && waitScreen.classList.contains('active')) {
+                    if (onWaitStart) onWaitStart();
+                }
+            }
         });
 
         // ─── Menú Principal ───

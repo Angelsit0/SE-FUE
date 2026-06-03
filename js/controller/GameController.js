@@ -66,10 +66,10 @@ export class GameController {
         // Inicializar input
         this._initInput();
 
-        // Mostrar pantalla de registro
-        this.screenManager.showScreen('screen-register', 'fade');
+        // Mostrar pantalla de espera inicial
+        this.screenManager.showScreen('screen-wait', 'fade');
 
-        console.log('⚡ Sistema listo. Esperando operario...');
+        console.log('⚡ Sistema listo. Esperando inicio de sesión...');
     }
 
     // ═══════════════════════════════════════════════
@@ -128,6 +128,10 @@ export class GameController {
 
     _initInput() {
         this.inputController.init({
+            onWaitStart: () => {
+                this.audio.playClick();
+                this.screenManager.showScreen('screen-register', 'fade');
+            },
             onVerdadero: () => this._handleLogicAnswer(true),
             onFalso: () => this._handleLogicAnswer(false),
             onConfirmVenn: () => this._handleVennConfirm(),
