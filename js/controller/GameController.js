@@ -87,7 +87,13 @@ export class GameController {
         // Manual View
         this.manualView.init(() => {
             this.audio.playClick();
-            this.screenManager.showScreen('screen-title', 'fade');
+            if (this._previousScreen === 'screen-game') {
+                gameState.resumeGame();
+                this.timer.start();
+                this.screenManager.showScreen('screen-game', 'fade');
+            } else {
+                this.screenManager.showScreen('screen-title', 'fade');
+            }
         });
 
         // Leaderboard View
@@ -133,6 +139,15 @@ export class GameController {
             onManual: () => {
                 this.audio.playClick();
                 this.manualView.reset();
+                this._previousScreen = 'screen-title';
+                this.screenManager.showScreen('screen-manual', 'fade');
+            },
+            onGameManual: () => {
+                this.audio.playClick();
+                this.manualView.reset();
+                gameState.pauseGame();
+                this.timer.stop();
+                this._previousScreen = 'screen-game';
                 this.screenManager.showScreen('screen-manual', 'fade');
             },
             onLeaderboard: () => {
@@ -407,16 +422,68 @@ export class GameController {
     _handleVictory(data) {
         this.timer.stop();
         this.audio.stopAmbientHum();
-        this.audio.playVictory();
 
         // Registrar puntuación
         const userName = gameState.currentUser ? gameState.currentUser.name : 'Anónimo';
         this.leaderboard.addEntry(userName, data.score, 4);
 
-        // Mostrar victoria
+        // Mostrar pantalla de victoria con animación de generador
         setTimeout(() => {
-            this.victoryView.show(data.score, gameState.getFormattedTime());
             this.screenManager.showScreen('screen-victory', 'fade');
+            
+            const fillBar = document.getElementById('generator-fill-bar');
+            const statusText = document.getElementById('generator-status-text');
+            const flash = document.getElementById('victory-flash');
+            const animContainer = document.getElementById('generator-anim-container');
+            const victoryContent = document.getElementById('victory-content');
+            
+            // Resetear animación por si juega de nuevo
+            if (fillBar && flash && animContainer && victoryContent) {
+                fillBar.style.transition = 'none';
+                fillBar.style.width = '0%';
+                fillBar.style.backgroundColor = 'var(--danger-red)';
+                fillBar.style.boxShadow = '0 0 15px rgba(255,51,51,0.8)';
+                flash.style.animation = 'none';
+                animContainer.style.display = 'flex';
+                victoryContent.style.display = 'none';
+                statusText.textContent = 'Iniciando secuencia de arranque...';
+                
+                // Forzar reflow para reiniciar CSS
+                void fillBar.offsetWidth;
+                
+                // Iniciar llenado (3 segundos)
+                fillBar.style.transition = 'width 3s linear, background-color 0.5s ease, box-shadow 0.5s ease';
+                fillBar.style.width = '100%';
+                
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 10;
+                    if(progress > 30 && progress <= 70) {
+                        fillBar.style.backgroundColor = 'var(--neon-yellow)';
+                        fillBar.style.boxShadow = '0 0 15px rgba(255,204,0,0.8)';
+                        statusText.textContent = 'Acoplando turbinas...';
+                    } else if(progress > 70) {
+                        fillBar.style.backgroundColor = 'var(--success-green)';
+                        fillBar.style.boxShadow = '0 0 20px var(--success-green)';
+                        statusText.textContent = '¡Energía estabilizada!';
+                    }
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        
+                        // Disparar flash y sonido de victoria
+                        this.audio.playVictory();
+                        flash.style.animation = 'flashFade 2s forwards';
+                        
+                        // Revelar pantalla real de victoria a los 200ms (pico de luz)
+                        setTimeout(() => {
+                            animContainer.style.display = 'none';
+                            victoryContent.style.display = 'flex';
+                            this.victoryView.show(data.score, gameState.getFormattedTime());
+                        }, 200);
+                    }
+                }, 300);
+            }
         }, 500);
     }
 

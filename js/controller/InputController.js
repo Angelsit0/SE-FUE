@@ -24,7 +24,8 @@ export class InputController {
             onLogout,
             onRetry,
             onMenuFromGameover,
-            onMenuFromVictory
+            onMenuFromVictory,
+            onGameManual
         } = callbacks;
 
         // ─── Botones de Lógica ───
@@ -60,6 +61,10 @@ export class InputController {
 
         this._bind('btn-manual', 'click', () => {
             if (onManual) onManual();
+        });
+
+        this._bind('btn-game-manual', 'click', () => {
+            if (onGameManual) onGameManual();
         });
 
         this._bind('btn-leaderboard', 'click', () => {

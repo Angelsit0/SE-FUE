@@ -164,6 +164,9 @@
             <div class="hud-section hud-score-section">
                 <span class="hud-label">ENERGÍA (PTS)</span>
                 <span id="hud-score" class="hud-value hud-score">0</span>
+                <button id="btn-game-manual" class="btn-industrial btn-small" style="margin-top: 10px; padding: 5px 10px; font-size: 8px;">
+                    <span class="btn-icon">📖</span> MANUAL
+                </button>
             </div>
         </div>
 
@@ -435,7 +438,19 @@
     <!-- SCREEN: VICTORIA                             -->
     <!-- ============================================ -->
     <div id="screen-victory" class="screen">
-        <div class="victory-container">
+        <div class="victory-flash-overlay" id="victory-flash"></div>
+        
+        <!-- Animación de carga del generador -->
+        <div class="generator-container" id="generator-anim-container">
+            <h3 class="generator-title blink">REINICIANDO PLANTA UJAP...</h3>
+            <div class="generator-body">
+                <div class="generator-fill" id="generator-fill-bar"></div>
+            </div>
+            <p class="generator-status" id="generator-status-text">Buscando conexión...</p>
+        </div>
+
+        <!-- Contenido real de victoria (oculto al inicio) -->
+        <div class="victory-container" id="victory-content" style="display: none;">
             <div class="victory-glow"></div>
             <h1 class="victory-title">⚡ ENERGÍA RESTAURADA ⚡</h1>
             <h2 class="victory-subtitle">¡Misión Completada, Operario!</h2>

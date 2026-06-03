@@ -62,6 +62,20 @@ export class GameState {
     }
   }
 
+  pauseGame() {
+    if (this.gameStatus === 'playing') {
+      this.gameStatus = 'paused';
+      this._notify('gamePaused', {});
+    }
+  }
+
+  resumeGame() {
+    if (this.gameStatus === 'paused') {
+      this.gameStatus = 'playing';
+      this._notify('gameResumed', {});
+    }
+  }
+
   triggerGameOver() {
     this.gameStatus = 'gameover';
     this._notify('gameOver', { score: this.score, level: this.currentLevel });

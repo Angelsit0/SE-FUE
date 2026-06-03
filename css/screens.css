@@ -273,6 +273,59 @@
     justify-content: center;
 }
 
+/* ─── GENERATOR ANIMATION ─── */
+.generator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    z-index: 10;
+}
+
+.generator-title {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    color: var(--danger-red);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.generator-body {
+    width: min(400px, 90vw);
+    height: 40px;
+    border: 4px solid var(--danger-red);
+    background: var(--bg-darkest);
+    position: relative;
+    box-shadow: 0 0 20px rgba(255,51,51,0.5);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.generator-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--danger-red);
+    box-shadow: 0 0 15px rgba(255,51,51,0.8);
+    transition: width 0.1s linear, background-color 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+.generator-status {
+    margin-top: 15px;
+    font-family: var(--font-body);
+    font-size: 24px;
+    color: var(--text-primary);
+}
+
+.victory-flash-overlay {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* ─── VICTORY SCREEN ─── */
 .victory-container {
     display: flex;
