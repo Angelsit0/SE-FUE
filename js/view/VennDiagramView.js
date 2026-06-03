@@ -20,26 +20,32 @@ export class VennDiagramView {
 
     this.svg.innerHTML = `
       <defs>
-        <clipPath id="clip-A"><circle cx="180" cy="175" r="120"/></clipPath>
-        <clipPath id="clip-B"><circle cx="320" cy="175" r="120"/></clipPath>
-        <clipPath id="clip-AB"><circle cx="180" cy="175" r="120"/></clipPath>
+        <mask id="mask-A-only-2">
+          <rect width="500" height="350" fill="white"/>
+          <circle cx="320" cy="175" r="120" fill="black"/>
+        </mask>
+        <mask id="mask-B-only-2">
+          <rect width="500" height="350" fill="white"/>
+          <circle cx="180" cy="175" r="120" fill="black"/>
+        </mask>
+        <clipPath id="clip-AB-2">
+          <circle cx="320" cy="175" r="120"/>
+        </clipPath>
       </defs>
+      
       <!-- A only region -->
-      <g class="venn-region-group" data-region="A_only">
-        <circle cx="180" cy="175" r="120" class="venn-region" data-region="A_only"/>
-      </g>
+      <circle cx="180" cy="175" r="120" class="venn-region" data-region="A_only" mask="url(#mask-A-only-2)"/>
+      
       <!-- B only region -->
-      <g class="venn-region-group" data-region="B_only">
-        <circle cx="320" cy="175" r="120" class="venn-region" data-region="B_only"/>
-      </g>
-      <!-- AB intersection (rendered on top) -->
-      <g class="venn-region-group" data-region="AB">
-        <clipPath id="intersect-AB"><circle cx="320" cy="175" r="120"/></clipPath>
-        <circle cx="180" cy="175" r="120" clip-path="url(#intersect-AB)" class="venn-region" data-region="AB"/>
-      </g>
+      <circle cx="320" cy="175" r="120" class="venn-region" data-region="B_only" mask="url(#mask-B-only-2)"/>
+      
+      <!-- AB intersection -->
+      <circle cx="180" cy="175" r="120" class="venn-region" data-region="AB" clip-path="url(#clip-AB-2)"/>
+      
       <!-- Circle outlines -->
       <circle cx="180" cy="175" r="120" fill="none" stroke="#00f0ff" stroke-width="2" style="pointer-events:none"/>
       <circle cx="320" cy="175" r="120" fill="none" stroke="#00f0ff" stroke-width="2" style="pointer-events:none"/>
+      
       <!-- Labels -->
       <text x="130" y="175" class="venn-label" text-anchor="middle" dominant-baseline="middle">A</text>
       <text x="370" y="175" class="venn-label" text-anchor="middle" dominant-baseline="middle">B</text>
@@ -63,29 +69,60 @@ export class VennDiagramView {
 
     this.svg.innerHTML = `
       <defs>
-        <clipPath id="cA"><circle cx="${ax}" cy="${ay}" r="${r}"/></clipPath>
-        <clipPath id="cB"><circle cx="${bx}" cy="${by}" r="${r}"/></clipPath>
-        <clipPath id="cC"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath>
-        <clipPath id="cAB"><circle cx="${bx}" cy="${by}" r="${r}"/></clipPath>
-        <clipPath id="cAC"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath>
-        <clipPath id="cBC"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath>
+        <mask id="mask-A-only-3">
+          <rect width="500" height="450" fill="white"/>
+          <circle cx="${bx}" cy="${by}" r="${r}" fill="black"/>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="black"/>
+        </mask>
+        <mask id="mask-B-only-3">
+          <rect width="500" height="450" fill="white"/>
+          <circle cx="${ax}" cy="${ay}" r="${r}" fill="black"/>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="black"/>
+        </mask>
+        <mask id="mask-C-only-3">
+          <rect width="500" height="450" fill="white"/>
+          <circle cx="${ax}" cy="${ay}" r="${r}" fill="black"/>
+          <circle cx="${bx}" cy="${by}" r="${r}" fill="black"/>
+        </mask>
+        
+        <mask id="mask-AB-only-3">
+          <rect width="500" height="450" fill="white"/>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="black"/>
+        </mask>
+        <mask id="mask-AC-only-3">
+          <rect width="500" height="450" fill="white"/>
+          <circle cx="${bx}" cy="${by}" r="${r}" fill="black"/>
+        </mask>
+        <mask id="mask-BC-only-3">
+          <rect width="500" height="450" fill="white"/>
+          <circle cx="${ax}" cy="${ay}" r="${r}" fill="black"/>
+        </mask>
+
+        <clipPath id="clip-A-3"><circle cx="${ax}" cy="${ay}" r="${r}"/></clipPath>
+        <clipPath id="clip-B-3"><circle cx="${bx}" cy="${by}" r="${r}"/></clipPath>
+        <clipPath id="clip-C-3"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath>
       </defs>
-      <!-- Base circles as click targets for 'only' regions -->
-      <circle cx="${ax}" cy="${ay}" r="${r}" class="venn-region" data-region="A_only"/>
-      <circle cx="${bx}" cy="${by}" r="${r}" class="venn-region" data-region="B_only"/>
-      <circle cx="${cx}" cy="${cy}" r="${r}" class="venn-region" data-region="C_only"/>
+      
+      <!-- 'only' regions -->
+      <circle cx="${ax}" cy="${ay}" r="${r}" class="venn-region" data-region="A_only" mask="url(#mask-A-only-3)"/>
+      <circle cx="${bx}" cy="${by}" r="${r}" class="venn-region" data-region="B_only" mask="url(#mask-B-only-3)"/>
+      <circle cx="${cx}" cy="${cy}" r="${r}" class="venn-region" data-region="C_only" mask="url(#mask-C-only-3)"/>
+      
       <!-- 2-way intersections -->
-      <circle cx="${ax}" cy="${ay}" r="${r}" clip-path="url(#cAB)" class="venn-region" data-region="AB_only"/>
-      <circle cx="${ax}" cy="${ay}" r="${r}" clip-path="url(#cAC)" class="venn-region" data-region="AC_only"/>
-      <circle cx="${bx}" cy="${by}" r="${r}" clip-path="url(#cBC)" class="venn-region" data-region="BC_only"/>
+      <circle cx="${ax}" cy="${ay}" r="${r}" class="venn-region" data-region="AB_only" clip-path="url(#clip-B-3)" mask="url(#mask-AB-only-3)"/>
+      <circle cx="${ax}" cy="${ay}" r="${r}" class="venn-region" data-region="AC_only" clip-path="url(#clip-C-3)" mask="url(#mask-AC-only-3)"/>
+      <circle cx="${bx}" cy="${by}" r="${r}" class="venn-region" data-region="BC_only" clip-path="url(#clip-C-3)" mask="url(#mask-BC-only-3)"/>
+      
       <!-- 3-way intersection (ABC) -->
-      <g clip-path="url(#cC)">
-        <circle cx="${ax}" cy="${ay}" r="${r}" clip-path="url(#cAB)" class="venn-region" data-region="ABC"/>
+      <g clip-path="url(#clip-C-3)">
+        <circle cx="${ax}" cy="${ay}" r="${r}" class="venn-region" data-region="ABC" clip-path="url(#clip-B-3)"/>
       </g>
+      
       <!-- Circle outlines -->
       <circle cx="${ax}" cy="${ay}" r="${r}" fill="none" stroke="#00f0ff" stroke-width="2" style="pointer-events:none"/>
       <circle cx="${bx}" cy="${by}" r="${r}" fill="none" stroke="#00f0ff" stroke-width="2" style="pointer-events:none"/>
       <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#00f0ff" stroke-width="2" style="pointer-events:none"/>
+      
       <!-- Labels -->
       <text x="${ax - 60}" y="${ay - 50}" class="venn-label" text-anchor="middle">A</text>
       <text x="${bx + 60}" y="${by - 50}" class="venn-label" text-anchor="middle">B</text>

@@ -25,11 +25,11 @@ export const LEVELS = [
     locationIcon: '🏥',
     backgroundImage: 'assets/backgrounds/level2_odontologia.jpg',
     problems: [
-      { type: 'venn', description: 'PREGUNTA L2-A: Pinta TODO el círculo A. (Haz 1 solo clic en la media luna izquierda).', sets: ['A', 'B'], operation: 'Pintar A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-B: Pinta TODO el círculo B. (Haz 1 solo clic en la media luna derecha).', sets: ['A', 'B'], operation: 'Pintar B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-C: Pinta TODO el círculo A. (Haz 1 solo clic en la media luna izquierda).', sets: ['A', 'B'], operation: 'Pintar A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-D: Pinta TODO el círculo B. (Haz 1 solo clic en la media luna derecha).', sets: ['A', 'B'], operation: 'Pintar B', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-E: Pinta TODO el círculo A. (Haz 1 solo clic en la media luna izquierda).', sets: ['A', 'B'], operation: 'Pintar A', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] }
+      { type: 'venn', description: 'PREGUNTA L2-A: Pinta SOLO la media luna izquierda de A (sin tocar B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-B: Pinta SOLO la media luna derecha de B (sin tocar A).', sets: ['A', 'B'], operation: 'Solo B Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-C: Pinta SOLO la media luna izquierda de A (sin tocar B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-D: Pinta SOLO la media luna derecha de B (sin tocar A).', sets: ['A', 'B'], operation: 'Solo B Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-E: Pinta SOLO la media luna izquierda de A (sin tocar B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] }
     ]
   },
   {
@@ -53,11 +53,11 @@ export const LEVELS = [
     locationIcon: '🏛️',
     backgroundImage: 'assets/backgrounds/level4_rectorado.jpg',
     problems: [
-      { type: 'venn', description: 'PREGUNTA L4-A: Pinta TODO el círculo A. (Haz 1 solo clic en la luna de arriba a la izquierda).', sets: ['A', 'B', 'C'], operation: 'Pintar A', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-B: Pinta TODO el círculo B. (Haz 1 solo clic en la luna de arriba a la derecha).', sets: ['A', 'B', 'C'], operation: 'Pintar B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-C: Pinta TODO el círculo C. (Haz 1 solo clic en la luna de abajo al centro).', sets: ['A', 'B', 'C'], operation: 'Pintar C', operationDetail: 'Toca 1 sola zona', expectedRegions: ['C_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-D: Pinta TODO el círculo A. (Haz 1 solo clic en la luna de arriba a la izquierda).', sets: ['A', 'B', 'C'], operation: 'Pintar A', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-E: Pinta TODO el círculo B. (Haz 1 solo clic en la luna de arriba a la derecha).', sets: ['A', 'B', 'C'], operation: 'Pintar B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] }
+      { type: 'venn', description: 'PREGUNTA L4-A: Pinta SOLO la zona exterior de A (arriba izquierda) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo A Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-B: Pinta SOLO la zona exterior de B (arriba derecha) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo B Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-C: Pinta SOLO la zona exterior de C (abajo al centro) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo C Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['C_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-D: Pinta SOLO la zona exterior de A (arriba izquierda) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo A Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-E: Pinta SOLO la zona exterior de B (arriba derecha) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo B Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] }
     ]
   },
   {
