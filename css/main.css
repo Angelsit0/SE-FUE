@@ -379,3 +379,32 @@ body {
     background: var(--neon-cyan);
     color: var(--bg-darkest);
 }
+
+/* Responsividad Global */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    .btn-industrial {
+        padding: 12px 20px;
+        font-size: 10px;
+    }
+    .btn-large {
+        padding: 15px 25px;
+        font-size: 12px;
+    }
+    .modal-box {
+        padding: 20px;
+        width: 95vw;
+    }
+    .modal-warning {
+        font-size: 36px;
+    }
+    .modal-message {
+        font-size: 16px;
+    }
+    .input-group input {
+        font-size: 16px;
+        padding: 10px;
+    }
+}

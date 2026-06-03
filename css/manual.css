@@ -294,3 +294,34 @@
     background: #8a7a5a;
     border-radius: 3px;
 }
+
+/* Responsividad Manual */
+@media (max-width: 768px) {
+    .manual-paper {
+        padding: 40px 20px 20px;
+        width: 98vw;
+    }
+    .manual-subtitle {
+        font-size: 20px;
+    }
+    .manual-page {
+        font-size: 16px;
+    }
+    .manual-table th, .manual-table td {
+        font-size: 12px;
+        padding: 5px;
+    }
+    .manual-example {
+        font-size: 18px;
+    }
+    .formula {
+        font-size: 20px;
+    }
+    .btn-manual-nav {
+        padding: 8px 12px;
+        font-size: 8px;
+    }
+    .manual-stamp {
+        display: none; /* Ocultar el sello en móvil si estorba */
+    }
+}

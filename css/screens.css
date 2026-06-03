@@ -566,3 +566,53 @@
 #btn-clear-scores {
     margin-top: 15px;
 }
+
+/* Responsividad Pantallas */
+@media (max-width: 768px) {
+    .register-box {
+        padding: 20px;
+        width: 95vw;
+    }
+    .register-logo img {
+        max-width: 180px;
+    }
+    .title-logo {
+        max-width: 250px;
+        max-height: 200px;
+    }
+    .gameover-text {
+        font-size: clamp(36px, 15vw, 60px);
+    }
+    .gameover-subtitle {
+        font-size: 16px;
+    }
+    .gameover-score {
+        font-size: 32px;
+    }
+    .victory-title {
+        font-size: 24px;
+    }
+    .victory-score {
+        font-size: 40px;
+    }
+    .terminal-frame {
+        width: 98vw;
+    }
+    .terminal-body {
+        padding: 15px;
+    }
+    .leaderboard-entry {
+        padding: 10px;
+    }
+    .leaderboard-name {
+        font-size: 20px;
+    }
+    .admin-panel {
+        padding: 15px;
+        width: 98vw;
+    }
+    .admin-table th, .admin-table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
