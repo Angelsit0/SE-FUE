@@ -282,18 +282,16 @@
                     <div class="manual-page" data-page="2">
                         <h2 class="manual-page-title">SOLUCIONARIO - NIVEL 1</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <p>Busca la pregunta exacta que aparece en tu pantalla y presiona la respuesta indicada:</p>
+                        <p>Las fallas energéticas requieren evaluar el estado del Generador (A) y la Batería (B).</p>
                         <div class="manual-table" style="font-size: 13px; margin-top: 20px;">
                             <table>
                                 <thead>
-                                    <tr><th>PREGUNTA EXACTA</th><th>RESPUESTA CORRECTA</th></tr>
+                                    <tr><th>CONDICIÓN LÓGICA</th><th>RESULTADO DE ENERGÍA</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L1-A: Si A es FALSO y B es VERDADERO. ¿"A o B" es verdadero?</td><td style="color:var(--success-green)">VERDADERO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L1-B: Si A es VERDADERO y B es FALSO. ¿"A y B" es verdadero?</td><td style="color:var(--danger-red)">FALSO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L1-C: Si A es VERDADERO. ¿Lo contrario de A (NO A) es verdadero?</td><td style="color:var(--danger-red)">FALSO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L1-D: Si A es FALSO y B es FALSO. ¿"A o B" es verdadero?</td><td style="color:var(--danger-red)">FALSO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L1-E: Si A es VERD. y B es VERD. ¿"A y B" es verdadero?</td><td style="color:var(--success-green)">VERDADERO</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Sistema de apoyo: "A o B"</td><td><span style="color:var(--success-green)">VERDADERO</span> si al menos uno funciona. Falso si fallan ambos.</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Máxima potencia: "A y B"</td><td><span style="color:var(--success-green)">VERDADERO</span> SOLO si ambos funcionan. Falso si falla al menos uno.</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Evaluación de Error: "NO A"</td><td><span style="color:var(--success-green)">VERDADERO</span> si A está fallando. Falso si A funciona.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -304,18 +302,17 @@
                     <div class="manual-page" data-page="3">
                         <h2 class="manual-page-title">SOLUCIONARIO - NIVEL 2</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <p>Busca la pregunta exacta y marca las zonas del dibujo exactamente como se indica (te pedirá pintar SOLO 1 zona exterior):</p>
+                        <p>Reparación de circuitos por zonas. Presta atención a las palabras clave del panel:</p>
                         <div class="manual-table" style="font-size: 13px; margin-top: 15px;">
                             <table>
                                 <thead>
-                                    <tr><th>PREGUNTA EXACTA</th><th>DÓNDE HACER CLIC (TOCAR 1 SOLA VEZ)</th></tr>
+                                    <tr><th>INSTRUCCIÓN DEL PANEL</th><th>DÓNDE HACER CLIC</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L2-A: Pinta SOLO la media luna izquierda de A...</td><td>Haz clic en la media luna izquierda (A). Se pintará SOLO esa parte.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L2-B: Pinta SOLO la media luna derecha de B...</td><td>Haz clic en la media luna derecha (B). Se pintará SOLO esa parte.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L2-C: Pinta SOLO la media luna izquierda de A...</td><td>Haz clic en la media luna izquierda (A). Se pintará SOLO esa parte.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L2-D: Pinta SOLO la media luna derecha de B...</td><td>Haz clic en la media luna derecha (B). Se pintará SOLO esa parte.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L2-E: Pinta SOLO la media luna izquierda de A...</td><td>Haz clic en la media luna izquierda (A). Se pintará SOLO esa parte.</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Circuitos exclusivos del Sistema Principal (A)</td><td>Toca SOLO la media luna izquierda de A.</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Circuitos exclusivos de Refrigeración (B)</td><td>Toca SOLO la media luna derecha de B.</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Nodo central / donde se conectan ambos</td><td>Toca SOLO el óvalo central (la intersección).</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Sobrecarga / Activar TODO</td><td>Toca TODAS las zonas (izquierda, derecha y centro).</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -326,18 +323,18 @@
                     <div class="manual-page" data-page="4">
                         <h2 class="manual-page-title">SOLUCIONARIO - NIVEL 3</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <p>Nivel crítico. Toca la respuesta correcta según la pregunta de tu pantalla:</p>
+                        <p>Nivel crítico: Leyes de De Morgan. Verifica si las afirmaciones de los técnicos coinciden con las leyes matemáticas:</p>
                         <div class="manual-table" style="font-size: 13px; margin-top: 20px;">
                             <table>
                                 <thead>
-                                    <tr><th>PREGUNTA EXACTA</th><th>RESPUESTA CORRECTA</th></tr>
+                                    <tr><th>ANÁLISIS DE LA AFIRMACIÓN</th><th>¿ES CORRECTA?</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L3-A: Ley de Morgan 1...</td><td style="color:var(--success-green)">VERDADERO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L3-B: Ley de Morgan 2...</td><td style="color:var(--success-green)">VERDADERO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L3-C: Ley de Morgan 3...</td><td style="color:var(--danger-red)">FALSO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L3-D: Ley de Morgan 4...</td><td style="color:var(--success-green)">VERDADERO</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L3-E: Ley de Morgan 5...</td><td style="color:var(--danger-red)">FALSO</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">"Es FALSO que (bomba y filtro funcionen)" es igual a "Falla la bomba O falla el filtro"</td><td style="color:var(--success-green)">VERDADERO</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">"No hay bomba Y no hay filtro" es igual a "Es FALSO que haya (bomba o filtro)"</td><td style="color:var(--success-green)">VERDADERO</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Si ambos funcionan, ¿"falla bomba O falla filtro"?</td><td style="color:var(--danger-red)">FALSO</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Si sólo uno falla, ¿"es falso que tengamos ambos al mismo tiempo"?</td><td style="color:var(--success-green)">VERDADERO</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Si sólo uno funciona, ¿"tenemos ambas operando"?</td><td style="color:var(--danger-red)">FALSO</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -348,18 +345,18 @@
                     <div class="manual-page" data-page="5">
                         <h2 class="manual-page-title">SOLUCIONARIO - NIVEL 4</h2>
                         <div class="manual-divider">───────────────────</div>
-                        <p>Este nivel tiene 3 círculos. Para hacerlo IMPOSIBLE DE FALLAR, te pedirá pintar UNA SOLA PIEZA haciendo 1 solo clic:</p>
+                        <p>Aislamiento de componentes triples (Luces, Alarmas, Puertas):</p>
                         <div class="manual-table" style="font-size: 13px; margin-top: 15px;">
                             <table>
                                 <thead>
-                                    <tr><th>PREGUNTA EXACTA</th><th>DÓNDE HACER CLIC (TOCAR 1 SOLA VEZ)</th></tr>
+                                    <tr><th>ZONA SOLICITADA</th><th>DÓNDE HACER CLIC</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L4-A: Pinta SOLO la zona exterior de A...</td><td>Haz clic en la parte superior izquierda de A (la zona que no choca con nadie). Se pintará SOLO ESA PARTE.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L4-B: Pinta SOLO la zona exterior de B...</td><td>Haz clic en la parte superior derecha de B (la zona que no choca con nadie). Se pintará SOLO ESA PARTE.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L4-C: Pinta SOLO la zona exterior de C...</td><td>Haz clic en la parte de abajo al centro (C) (la zona que no choca con nadie). Se pintará SOLO ESA PARTE.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L4-D: Pinta SOLO la zona exterior de A...</td><td>Haz clic en la parte superior izquierda de A (la zona que no choca con nadie). Se pintará SOLO ESA PARTE.</td></tr>
-                                    <tr><td style="color:var(--neon-cyan)">PREGUNTA L4-E: Pinta SOLO la zona exterior de B...</td><td>Haz clic en la parte superior derecha de B (la zona que no choca con nadie). Se pintará SOLO ESA PARTE.</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Aislamiento Luces (A) / Terminal Exterior A</td><td>Haz clic en la parte SUPERIOR IZQUIERDA (solo la zona exterior).</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Aislamiento Alarmas (B) / Terminal Exterior B</td><td>Haz clic en la parte SUPERIOR DERECHA (solo la zona exterior).</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Aislamiento Puertas (C) / Terminal Exterior C</td><td>Haz clic ABAJO al centro (solo la zona exterior).</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Zona compartida entre A y B (SIN tocar C)</td><td>El pétalo superior pequeño entre A y B.</td></tr>
+                                    <tr><td style="color:var(--neon-cyan)">Núcleo central (Convergen los 3)</td><td>El pequeño triángulo exacto en el centro.</td></tr>
                                 </tbody>
                             </table>
                         </div>

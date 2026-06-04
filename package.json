@@ -1,0 +1,28 @@
+{
+  "name": "se-fue",
+  "version": "1.0.0",
+  "description": "Juego de supervivencia cooperativo ambientado en la planta eléctrica de la UJAP.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -w"
+  },
+  "build": {
+    "appId": "com.angeltorres.sefuego",
+    "productName": "SE FUE",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/logo.jpg"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "author": "Angel Torres & Luis Orellana",
+  "license": "ISC"
+}

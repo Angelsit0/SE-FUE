@@ -12,11 +12,11 @@ export const LEVELS = [
     locationIcon: '📚',
     backgroundImage: 'assets/backgrounds/level1_biblioteca.jpg',
     problems: [
-      { type: 'logic', description: 'PREGUNTA L1-A: Si A es FALSO y B es VERDADERO. ¿"A o B" es verdadero?', variables: { p: false, q: true }, expression: 'A o B', expressionDetail: 'A=FALSO, B=VERDADERO', expectedAnswer: true },
-      { type: 'logic', description: 'PREGUNTA L1-B: Si A es VERDADERO y B es FALSO. ¿"A y B" es verdadero?', variables: { p: true, q: false }, expression: 'A y B', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'PREGUNTA L1-C: Si A es VERDADERO. ¿Lo contrario de A (NO A) es verdadero?', variables: { p: true }, expression: 'NO A', expressionDetail: 'A=VERDADERO', expectedAnswer: false },
-      { type: 'logic', description: 'PREGUNTA L1-D: Si A es FALSO y B es FALSO. ¿"A o B" es verdadero?', variables: { p: false, q: false }, expression: 'A o B', expressionDetail: 'A=FALSO, B=FALSO', expectedAnswer: false },
-      { type: 'logic', description: 'PREGUNTA L1-E: Si A es VERD. y B es VERD. ¿"A y B" es verdadero?', variables: { p: true, q: true }, expression: 'A y B', expressionDetail: 'A=VERD., B=VERD.', expectedAnswer: true }
+      { type: 'logic', description: 'PREGUNTA L1-A: El Generador (A) falló, pero la Batería (B) está activa. Si el manual exige que al menos uno funcione (A o B), ¿el sistema tendrá energía?', variables: { p: false, q: true }, expression: 'A o B', expressionDetail: 'A=FALSO, B=VERDADERO', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L1-B: El Generador (A) funciona, pero la Batería (B) falló. Para este sector necesitamos AMBOS activos (A y B). ¿Hay energía suficiente?', variables: { p: true, q: false }, expression: 'A y B', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L1-C: El Generador (A) funciona perfecto. El panel del sistema evalúa la condición de error: "NO A". ¿Esta condición de error se cumple (es verdadera)?', variables: { p: true }, expression: 'NO A', expressionDetail: 'A=VERDADERO', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L1-D: Hubo un colapso: Generador (A) falló y Batería (B) falló. El circuito de emergencia necesita al menos uno (A o B). ¿Se encenderán las luces?', variables: { p: false, q: false }, expression: 'A o B', expressionDetail: 'A=FALSO, B=FALSO', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L1-E: Generador (A) y Batería (B) están en línea. El sistema de máxima potencia requiere ambos (A y B). ¿Se puede activar la máxima potencia?', variables: { p: true, q: true }, expression: 'A y B', expressionDetail: 'A=VERD., B=VERD.', expectedAnswer: true }
     ]
   },
   {
@@ -26,11 +26,11 @@ export const LEVELS = [
     locationIcon: '🏥',
     backgroundImage: 'assets/backgrounds/level2_odontologia.jpg',
     problems: [
-      { type: 'venn', description: 'PREGUNTA L2-A: Pinta SOLO la media luna izquierda de A (sin tocar B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-B: Pinta SOLO la media luna derecha de B (sin tocar A).', sets: ['A', 'B'], operation: 'Solo B Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-C: Pinta SOLO la media luna izquierda de A (sin tocar B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-D: Pinta SOLO la media luna derecha de B (sin tocar A).', sets: ['A', 'B'], operation: 'Solo B Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L2-E: Pinta SOLO la media luna izquierda de A (sin tocar B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] }
+      { type: 'venn', description: 'PREGUNTA L2-A: Activa los circuitos exclusivos del Sistema Principal (A), asegurándote de no tocar NADA de la Refrigeración (B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-B: Enciende únicamente el nodo central donde ambos sistemas (A y B) se conectan y solapan.', sets: ['A', 'B'], operation: 'Intersección', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['AB'] },
+      { type: 'venn', description: 'PREGUNTA L2-C: Activa los circuitos exclusivos de la Refrigeración (B), sin tocar el Sistema Principal (A).', sets: ['A', 'B'], operation: 'Solo B Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L2-D: Sobrecarga el panel. Activa absolutamente TODO (todas las zonas de A y de B).', sets: ['A', 'B'], operation: 'Unión Completa', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only', 'B_only', 'AB'] },
+      { type: 'venn', description: 'PREGUNTA L2-E: Activa los circuitos exclusivos del Sistema Principal (A), asegurándote de no tocar NADA de la Refrigeración (B).', sets: ['A', 'B'], operation: 'Solo A Exterior', operationDetail: 'Selecciona las zonas correctas', expectedRegions: ['A_only'] }
     ]
   },
   {
@@ -40,11 +40,11 @@ export const LEVELS = [
     locationIcon: '⚙️',
     backgroundImage: 'assets/backgrounds/level3_laboratorio.jpg',
     problems: [
-      { type: 'logic', description: 'PREGUNTA L3-A: Ley de Morgan 1. Lee el manual y responde.', variables: { p: true, q: false }, expression: 'Morgan L3-A', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: true },
-      { type: 'logic', description: 'PREGUNTA L3-B: Ley de Morgan 2. Lee el manual y responde.', variables: { p: false, q: false }, expression: 'Morgan L3-B', expressionDetail: 'A=FALSO, B=FALSO', expectedAnswer: true },
-      { type: 'logic', description: 'PREGUNTA L3-C: Ley de Morgan 3. Lee el manual y responde.', variables: { p: true, q: true }, expression: 'Morgan L3-C', expressionDetail: 'A=VERD., B=VERD.', expectedAnswer: false },
-      { type: 'logic', description: 'PREGUNTA L3-D: Ley de Morgan 4. Lee el manual y responde.', variables: { p: false, q: true }, expression: 'Morgan L3-D', expressionDetail: 'A=FALSO, B=VERD.', expectedAnswer: true },
-      { type: 'logic', description: 'PREGUNTA L3-E: Ley de Morgan 5. Lee el manual y responde.', variables: { p: true, q: false }, expression: 'Morgan L3-E', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: false }
+      { type: 'logic', description: 'PREGUNTA L3-A: Bomba=SI, Filtro=NO. El técnico dice: "Es FALSO que la bomba y el filtro funcionen". Por De Morgan, ¿es lo mismo que decir "Falla la bomba O falla el filtro"? ¿Esa afirmación es cierta?', variables: { p: true, q: false }, expression: 'Lógica Equivalente', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L3-B: Bomba=NO, Filtro=NO. Un operador dice: "No hay bomba Y no hay filtro". Por De Morgan, ¿es equivalente a "Es FALSO que haya bomba O filtro"? ¿Se cumple esto en la planta actual?', variables: { p: false, q: false }, expression: 'Equivalencia Estricta', expressionDetail: 'A=FALSO, B=FALSO', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L3-C: Bomba=SI, Filtro=SI. Alarma en panel: "Falla bomba O falla filtro". Analizando que ambos funcionan, ¿esta alarma es VERDADERA?', variables: { p: true, q: true }, expression: 'Análisis de Alarma', expressionDetail: 'A=VERD., B=VERD.', expectedAnswer: false },
+      { type: 'logic', description: 'PREGUNTA L3-D: Bomba=NO, Filtro=SI. El jefe afirma: "Es falso que tengamos bomba Y filtro al mismo tiempo". ¿El jefe tiene la razón?', variables: { p: false, q: true }, expression: 'Declaración Lógica', expressionDetail: 'A=FALSO, B=VERD.', expectedAnswer: true },
+      { type: 'logic', description: 'PREGUNTA L3-E: Bomba=SI, Filtro=NO. El sistema lanza mensaje: "Tenemos ambas máquinas operando perfectamente". ¿El sistema dice la verdad?', variables: { p: true, q: false }, expression: 'Validación de Subsistema', expressionDetail: 'A=VERD., B=FALSO', expectedAnswer: false }
     ]
   },
   {
@@ -54,11 +54,11 @@ export const LEVELS = [
     locationIcon: '🏛️',
     backgroundImage: 'assets/backgrounds/level4_rectorado.jpg',
     problems: [
-      { type: 'venn', description: 'PREGUNTA L4-A: Pinta SOLO la zona exterior de A (arriba izquierda) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo A Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-B: Pinta SOLO la zona exterior de B (arriba derecha) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo B Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-C: Pinta SOLO la zona exterior de C (abajo al centro) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo C Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['C_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-D: Pinta SOLO la zona exterior de A (arriba izquierda) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo A Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
-      { type: 'venn', description: 'PREGUNTA L4-E: Pinta SOLO la zona exterior de B (arriba derecha) que no toca a nadie más.', sets: ['A', 'B', 'C'], operation: 'Solo B Exterior', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] }
+      { type: 'venn', description: 'PREGUNTA L4-A: Aísla el sistema de Luces (A). Activa su terminal exterior superior izquierda sin tocar Alarmas ni Puertas.', sets: ['A', 'B', 'C'], operation: 'Aislamiento A', operationDetail: 'Toca 1 sola zona', expectedRegions: ['A_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-B: Activa exclusivamente el panel exterior de Alarmas (B), asegurándote de no encender Luces ni Puertas.', sets: ['A', 'B', 'C'], operation: 'Aislamiento B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['B_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-C: Desbloquea las Puertas (C) usando su terminal exterior (abajo al centro), que no interfiere con el resto.', sets: ['A', 'B', 'C'], operation: 'Aislamiento C', operationDetail: 'Toca 1 sola zona', expectedRegions: ['C_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-D: Enciende ÚNICAMENTE la zona compartida entre Luces (A) y Alarmas (B), pero que no involucre a las Puertas (C).', sets: ['A', 'B', 'C'], operation: 'Intersección A-B', operationDetail: 'Toca 1 sola zona', expectedRegions: ['AB_only'] },
+      { type: 'venn', description: 'PREGUNTA L4-E: Activa el núcleo central de la planta. El pequeño triángulo donde convergen exactamente los 3 sistemas (A, B y C).', sets: ['A', 'B', 'C'], operation: 'Núcleo Central', operationDetail: 'Toca 1 sola zona', expectedRegions: ['ABC'] }
     ]
   },
   {
