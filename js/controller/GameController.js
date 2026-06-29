@@ -540,9 +540,20 @@ export class GameController {
             // ¡Correcto!
             this.audio.playSuccess();
             gameState.addScore(500);
-            gameState.addCoins(10); // Recompensa de monedas
+            
+            // Recompensa de monedas base (10) + bonus por streak (+5 por nivel de combo posterior)
+            const bonusCoins = 10 + (gameState.streak > 1 ? (gameState.streak - 1) * 5 : 0);
+            gameState.addCoins(bonusCoins);
             gameState.addTime(15);
-            this.gameView.showFeedback(true);
+            
+            // Mensaje personalizado de feedback con la información del Combo
+            let feedbackMsg = `⚡ ¡ESTABILIZADO! +500 pts +15s`;
+            if (gameState.streak > 1) {
+                feedbackMsg += `\n🔥 COMBO x${gameState.streak} (+${bonusCoins} Coins!)`;
+            } else {
+                feedbackMsg += `\n+10 Coins`;
+            }
+            this.gameView.showFeedback(true, feedbackMsg);
 
             // Avanzar al siguiente nivel después del feedback
             setTimeout(() => {
@@ -590,6 +601,7 @@ export class GameController {
 
             case 'scoreChanged':
                 this.gameView.updateScore(data.score);
+                this.gameView.updateStreak(data.streak || 0);
                 break;
 
             case 'coinsChanged':
@@ -605,6 +617,7 @@ export class GameController {
 
             case 'timeRemoved':
                 this.gameView.updateTimer(gameState.getFormattedTime(), gameState.getTimePercent());
+                this.gameView.updateStreak(0);
                 break;
 
             case 'levelChanged':

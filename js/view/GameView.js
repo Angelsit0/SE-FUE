@@ -79,6 +79,19 @@ export class GameView {
     }
   }
 
+  updateStreak(streak) {
+    const el = document.getElementById('hud-streak');
+    if (!el) return;
+    if (streak > 1) {
+      el.textContent = `x${streak} 🔥`;
+      el.style.display = 'inline-block';
+      el.style.transform = 'scale(1.4)';
+      setTimeout(() => el.style.transform = 'scale(1)', 150);
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
   /**
    * Update the level indicator (1-indexed display).
    * @param {number} levelIndex - 0-based level index.
@@ -181,15 +194,17 @@ export class GameView {
    * Show correct/incorrect feedback overlay.
    * @param {boolean} isCorrect
    */
-  showFeedback(isCorrect) {
+  showFeedback(isCorrect, customMessage = null) {
     if (!this.feedbackOverlay || !this.feedbackText) return;
-
     this.feedbackOverlay.className = 'feedback-overlay show ' + (isCorrect ? 'correct' : 'incorrect');
     this.feedbackText.className = 'feedback-text ' + (isCorrect ? 'correct' : 'incorrect');
-    this.feedbackText.textContent = isCorrect
-      ? '⚡ ¡ESTABILIZADO! +500 pts +15s +10 Coins'
-      : '💥 ¡CORTOCIRCUITO! -20s';
-
+    
+    if (customMessage) {
+        this.feedbackText.textContent = customMessage;
+    } else {
+        this.feedbackText.textContent = isCorrect ? '⚡ ¡ESTABILIZADO! +500 pts +15s' : '💥 ¡CORTOCIRCUITO! -20s';
+    }
+    
     setTimeout(() => {
       this.feedbackOverlay.className = 'feedback-overlay';
     }, isCorrect ? 1500 : 1000);

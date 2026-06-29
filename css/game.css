@@ -648,6 +648,8 @@
     background: rgba(0,0,0,0.7);
     border: 2px solid;
     border-radius: 8px;
+    white-space: pre-line;
+    text-align: center;
 }
 
 .feedback-text.correct {

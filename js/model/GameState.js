@@ -13,6 +13,7 @@ export class GameState {
     this.timeRemaining = 300; // 5 minutes in seconds
     this.gameStatus = 'idle'; // idle, playing, paused, gameover, victory
     this.currentUser = null;
+    this.streak = 0; // Combo de respuestas consecutivas
     this._observers = [];
   }
 
@@ -26,16 +27,18 @@ export class GameState {
 
   startGame() {
     this.score = 0;
+    this.streak = 0;
     // this.coins is loaded from user, do not reset here
     this.currentLevel = 0;
-    this.timeRemaining = 300;
+    this.timeRemaining = 450;
     this.gameStatus = 'playing';
     this._notify('gameStarted', {});
   }
 
   addScore(points = 500) {
     this.score += points;
-    this._notify('scoreChanged', { score: this.score });
+    this.streak++;
+    this._notify('scoreChanged', { score: this.score, streak: this.streak });
   }
 
   addCoins(amount = 10) {
@@ -59,7 +62,8 @@ export class GameState {
 
   removeTime(seconds = 20) {
     this.timeRemaining = Math.max(0, this.timeRemaining - seconds);
-    this._notify('timeRemoved', { time: this.timeRemaining, removed: seconds });
+    this.streak = 0;
+    this._notify('timeRemoved', { time: this.timeRemaining, removed: seconds, streak: this.streak });
     if (this.timeRemaining <= 0) this.triggerGameOver();
   }
 
@@ -111,6 +115,7 @@ export class GameState {
   reset() {
     this.currentLevel = 0;
     this.score = 0;
+    this.streak = 0;
     this.timeRemaining = 450;
     this.gameStatus = 'idle';
   }

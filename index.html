@@ -208,7 +208,10 @@
             </div>
             <div class="hud-section hud-score-section">
                 <span class="hud-label">ENERGÍA (PTS)</span>
-                <span id="hud-score" class="hud-value hud-score">0</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span id="hud-score" class="hud-value hud-score">0</span>
+                    <span id="hud-streak" style="font-family: var(--font-heading); font-size: 8px; color: var(--neon-yellow); display: none; padding: 2px 4px; border: 1px solid var(--neon-yellow); border-radius: 3px; vertical-align: middle;">x0 🔥</span>
+                </div>
                 <span class="hud-label" style="margin-top:5px; color:var(--neon-yellow);">COINS UJAP</span>
                 <span id="hud-coins" class="hud-value" style="color:var(--neon-yellow);">0</span>
                 <div style="display:flex; gap: 5px; margin-top: 10px;">
