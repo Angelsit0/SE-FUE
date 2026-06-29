@@ -27,8 +27,13 @@ export class InputController {
             onMenuFromGameover,
             onMenuFromVictory,
             onGameManual,
-            onSkipIntro
+            onSkipIntro,
+            onSoundToggle
         } = callbacks;
+
+        this._bind('btn-game-sound', 'click', () => {
+            if (onSoundToggle) onSoundToggle();
+        });
 
         // ─── Botones de Lógica ───
         this._bind('btn-verdadero', 'click', () => {

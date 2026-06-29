@@ -24,9 +24,21 @@ export class AudioController {
             this.masterGain.gain.value = 0.3;
             this.masterGain.connect(this.ctx.destination);
             this._initialized = true;
+            this._muted = false;
         } catch (e) {
             console.warn('Web Audio API no disponible:', e);
         }
+    }
+
+    /**
+     * Alternar silencio (Mute / Unmute)
+     * @returns {boolean} - true si quedó en silencio, false si se activó el sonido.
+     */
+    toggleMute() {
+        if (!this._initialized) return false;
+        this._muted = !this._muted;
+        this.masterGain.gain.value = this._muted ? 0 : 0.3;
+        return this._muted;
     }
 
     /**

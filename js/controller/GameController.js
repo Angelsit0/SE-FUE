@@ -173,7 +173,15 @@ export class GameController {
             onRetry: () => this._startGame(),
             onMenuFromGameover: () => this._goToTitle(),
             onMenuFromVictory: () => this._goToTitle(),
-            onSkipIntro: () => this._startGame()
+            onSkipIntro: () => this._startGame(),
+            onSoundToggle: () => {
+                this.audio.playClick();
+                const isMuted = this.audio.toggleMute();
+                const icon = document.getElementById('sound-icon');
+                if (icon) {
+                    icon.textContent = isMuted ? '🔇' : '🔊';
+                }
+            }
         });
     }
 
