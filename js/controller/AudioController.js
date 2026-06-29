@@ -296,6 +296,94 @@ export class AudioController {
             try { this._ambientOsc2.stop(); } catch(e) {}
             this._ambientOsc2 = null;
         }
+        this.stopLevelMusic();
+    }
+
+    /**
+     * Reproduce una música de fondo abstracta / procedural según el nivel
+     */
+    playLevelMusic(levelIndex) {
+        if (!this._initialized) return;
+        this.stopLevelMusic(); // Stop previous
+
+        const now = this.ctx.currentTime;
+        
+        // Base frequencies per level (minor/dissonant for tension)
+        const baseFreqs = [
+            220, // A3 - L1
+            246.94, // B3 - L2
+            261.63, // C4 - L3
+            293.66, // D4 - L4
+            329.63, // E4 - L5
+            349.23, // F4 - L6
+            392.00, // G4 - L7
+            440.00, // A4 - L8
+            493.88, // B4 - L9
+            523.25  // C5 - L10 (Boss)
+        ];
+
+        const base = baseFreqs[Math.min(levelIndex, baseFreqs.length - 1)];
+
+        this._musicOsc = this.ctx.createOscillator();
+        this._musicGain = this.ctx.createGain();
+
+        // Waveform changes based on level
+        this._musicOsc.type = levelIndex >= 5 ? 'sawtooth' : (levelIndex % 2 === 0 ? 'sine' : 'triangle');
+        
+        // LFO for a slow pulsing effect
+        this._lfo = this.ctx.createOscillator();
+        this._lfoGain = this.ctx.createGain();
+        this._lfo.type = 'sine';
+        this._lfo.frequency.value = 0.5 + (levelIndex * 0.1); // faster pulse on higher levels
+        this._lfoGain.gain.value = 10;
+        this._lfo.connect(this._musicOsc.frequency);
+
+        this._musicOsc.frequency.value = base;
+        this._musicGain.gain.value = 0.03; // low volume background
+
+        this._musicOsc.connect(this._musicGain);
+        this._musicGain.connect(this.masterGain);
+
+        this._musicOsc.start();
+        this._lfo.start();
+    }
+
+    stopLevelMusic() {
+        if (this._musicOsc) {
+            try { this._musicOsc.stop(); } catch(e) {}
+            this._musicOsc = null;
+        }
+        if (this._lfo) {
+            try { this._lfo.stop(); } catch(e) {}
+            this._lfo = null;
+        }
+    }
+
+    /**
+     * Sonido de transición (whoosh electrónico)
+     */
+    playTransition() {
+        if (!this._initialized) return;
+        const now = this.ctx.currentTime;
+        
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(100, now + 0.3);
+        
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.1, now + 0.1);
+        gain.gain.linearRampToValueAtTime(0, now + 0.4);
+        
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        
+        osc.start(now);
+        osc.stop(now + 0.4);
+        
+        this._playNoiseBurst(0.1, 0.4);
     }
 
     // ─── UTILIDADES PRIVADAS ──────────────────────

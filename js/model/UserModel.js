@@ -47,7 +47,9 @@ export class UserModel {
       username,
       password, // In production use hashing, this is a client-side game
       registeredAt: new Date().toISOString(),
-      gamesPlayed: 0
+      gamesPlayed: 0,
+      gamesWon: 0,
+      coins: 50 // Te damos 50 coins de bienvenida
     };
     this.users.push(user);
     this._save();
@@ -73,6 +75,22 @@ export class UserModel {
     const user = this.users.find(u => u.id === userId);
     if (user) {
       user.gamesPlayed++;
+      this._save();
+    }
+  }
+
+  incrementGamesWon(userId) {
+    const user = this.users.find(u => u.id === userId);
+    if (user) {
+      user.gamesWon = (user.gamesWon || 0) + 1;
+      this._save();
+    }
+  }
+
+  updateCoins(userId, coins) {
+    const user = this.users.find(u => u.id === userId);
+    if (user) {
+      user.coins = coins;
       this._save();
     }
   }

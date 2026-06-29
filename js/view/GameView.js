@@ -8,6 +8,7 @@ export class GameView {
     // HUD elements
     this.hudTimer = document.getElementById('hud-timer');
     this.hudScore = document.getElementById('hud-score');
+    this.hudCoins = document.getElementById('hud-coins');
     this.hudLevel = document.getElementById('hud-level');
     this.timerBarFill = document.getElementById('timer-bar-fill');
 
@@ -23,6 +24,12 @@ export class GameView {
     this.wiresConnectControls = document.getElementById('wires-connect-controls');
     this.wiresCutControls = document.getElementById('wires-cut-controls');
     this.logicVariables = document.getElementById('logic-variables');
+    
+    // New Controls
+    this.memoryControls = document.getElementById('memory-controls');
+    this.sequenceControls = document.getElementById('sequence-controls');
+    this.quickmathControls = document.getElementById('quickmath-controls');
+    this.circuitmazeControls = document.getElementById('circuitmaze-controls');
 
     // Background
     this.gameBgImg = document.getElementById('game-bg-img');
@@ -59,9 +66,16 @@ export class GameView {
   updateScore(score) {
     if (this.hudScore) {
       this.hudScore.textContent = score;
-      // Brief animation
       this.hudScore.style.transform = 'scale(1.3)';
       setTimeout(() => this.hudScore.style.transform = 'scale(1)', 200);
+    }
+  }
+
+  updateCoins(coins) {
+    if (this.hudCoins) {
+      this.hudCoins.textContent = coins;
+      this.hudCoins.style.transform = 'scale(1.3)';
+      setTimeout(() => this.hudCoins.style.transform = 'scale(1)', 200);
     }
   }
 
@@ -70,7 +84,7 @@ export class GameView {
    * @param {number} levelIndex - 0-based level index.
    */
   updateLevel(levelIndex) {
-    if (this.hudLevel) this.hudLevel.textContent = `${levelIndex + 1}/5`;
+    if (this.hudLevel) this.hudLevel.textContent = `${levelIndex + 1}/10`;
   }
 
   /**
@@ -93,7 +107,11 @@ export class GameView {
     }
 
     // Hide all controls first
-    [this.logicControls, this.vennControls, this.wiresConnectControls, this.wiresCutControls].forEach(c => {
+    [
+      this.logicControls, this.vennControls, this.wiresConnectControls, 
+      this.wiresCutControls, this.memoryControls, this.sequenceControls, 
+      this.quickmathControls, this.circuitmazeControls
+    ].forEach(c => {
       if (c) c.classList.remove('active');
     });
 
@@ -107,6 +125,21 @@ export class GameView {
       if (this.problemExpr) this.problemExpr.textContent = '';
     } else if (problemData.type === 'wires-cut') {
       if (this.wiresCutControls) this.wiresCutControls.classList.add('active');
+      if (this.problemExpr) this.problemExpr.textContent = '';
+    } else if (problemData.type === 'memory') {
+      if (this.memoryControls) this.memoryControls.classList.add('active');
+      if (this.problemExpr) this.problemExpr.textContent = '';
+    } else if (problemData.type === 'sequence') {
+      if (this.sequenceControls) this.sequenceControls.classList.add('active');
+      if (this.problemExpr) this.problemExpr.textContent = '';
+    } else if (problemData.type === 'quickmath') {
+      if (this.quickmathControls) this.quickmathControls.classList.add('active');
+      if (this.problemExpr) this.problemExpr.textContent = '';
+    } else if (problemData.type === 'circuitmaze') {
+      if (this.circuitmazeControls) this.circuitmazeControls.classList.add('active');
+      if (this.problemExpr) this.problemExpr.textContent = '';
+    } else if (problemData.type === 'boss') {
+      // Boss level handles its own views
       if (this.problemExpr) this.problemExpr.textContent = '';
     }
   }
@@ -154,7 +187,7 @@ export class GameView {
     this.feedbackOverlay.className = 'feedback-overlay show ' + (isCorrect ? 'correct' : 'incorrect');
     this.feedbackText.className = 'feedback-text ' + (isCorrect ? 'correct' : 'incorrect');
     this.feedbackText.textContent = isCorrect
-      ? '⚡ ¡ESTABILIZADO! +500 pts +15s'
+      ? '⚡ ¡ESTABILIZADO! +500 pts +15s +10 Coins'
       : '💥 ¡CORTOCIRCUITO! -20s';
 
     setTimeout(() => {

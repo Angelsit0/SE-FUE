@@ -26,7 +26,8 @@ export class InputController {
             onRetry,
             onMenuFromGameover,
             onMenuFromVictory,
-            onGameManual
+            onGameManual,
+            onSkipIntro
         } = callbacks;
 
         // ─── Botones de Lógica ───
@@ -72,6 +73,10 @@ export class InputController {
             this._debounce('iniciar', () => {
                 if (onIniciar) onIniciar();
             }, 1000);
+        });
+
+        this._bind('btn-skip-intro', 'click', () => {
+            if (onSkipIntro) onSkipIntro();
         });
 
         this._bind('btn-manual', 'click', () => {

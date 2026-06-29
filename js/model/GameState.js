@@ -9,6 +9,7 @@ export class GameState {
     this.currentLevel = 0; // 0-4 for levels 1-5
     this.currentProblem = null;
     this.score = 0;
+    this.coins = 0; // Monedas UJAP para la tienda
     this.timeRemaining = 300; // 5 minutes in seconds
     this.gameStatus = 'idle'; // idle, playing, paused, gameover, victory
     this.currentUser = null;
@@ -25,6 +26,7 @@ export class GameState {
 
   startGame() {
     this.score = 0;
+    // this.coins is loaded from user, do not reset here
     this.currentLevel = 0;
     this.timeRemaining = 300;
     this.gameStatus = 'playing';
@@ -34,6 +36,20 @@ export class GameState {
   addScore(points = 500) {
     this.score += points;
     this._notify('scoreChanged', { score: this.score });
+  }
+
+  addCoins(amount = 10) {
+    this.coins += amount;
+    this._notify('coinsChanged', { coins: this.coins });
+  }
+
+  removeCoins(amount) {
+    if (this.coins >= amount) {
+      this.coins -= amount;
+      this._notify('coinsChanged', { coins: this.coins });
+      return true;
+    }
+    return false;
   }
 
   addTime(seconds = 15) {
@@ -56,7 +72,7 @@ export class GameState {
 
   nextLevel() {
     this.currentLevel++;
-    if (this.currentLevel >= 5) {
+    if (this.currentLevel >= 10) {
       this.triggerVictory();
     } else {
       this._notify('levelChanged', { level: this.currentLevel });
@@ -95,7 +111,7 @@ export class GameState {
   reset() {
     this.currentLevel = 0;
     this.score = 0;
-    this.timeRemaining = 300;
+    this.timeRemaining = 450;
     this.gameStatus = 'idle';
   }
 
@@ -106,7 +122,7 @@ export class GameState {
   }
 
   getTimePercent() {
-    return (this.timeRemaining / 300) * 100;
+    return (this.timeRemaining / 450) * 100;
   }
 }
 

@@ -4,6 +4,7 @@
 // ============================================
 
 import { GameController } from './controller/GameController.js';
+import { StoreController } from './controller/StoreController.js';
 
 /**
  * ¿SE FUE? — Planta Eléctrica UJAP
@@ -31,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Crear e inicializar el controlador principal
     const game = new GameController();
     game.init();
+
+    // Crear e inicializar el kiosko
+    const store = new StoreController();
 
     // Exponer para debugging (solo en desarrollo)
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {

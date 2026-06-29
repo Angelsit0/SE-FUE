@@ -7,6 +7,8 @@ export class VictoryView {
   constructor() {
     this.scoreEl = document.getElementById('victory-score');
     this.timeEl = document.getElementById('victory-time');
+    this.rankEl = document.getElementById('victory-rank');
+    this.coinsEl = document.getElementById('victory-coins');
     this.menuBtn = document.getElementById('btn-victory-menu');
   }
 
@@ -23,8 +25,10 @@ export class VictoryView {
    * @param {number} score - The player's final score.
    * @param {string} formattedTime - Remaining time as "MM:SS".
    */
-  show(score, formattedTime) {
+  show(score, formattedTime, rank = "Operario", coins = 0) {
     if (this.scoreEl) this.scoreEl.textContent = score;
     if (this.timeEl) this.timeEl.textContent = `Tiempo restante: ${formattedTime}`;
+    if (this.rankEl) this.rankEl.textContent = rank;
+    if (this.coinsEl) this.coinsEl.textContent = coins;
   }
 }

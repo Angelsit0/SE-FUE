@@ -33,7 +33,7 @@ namespace SE_FUE_Launcher
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = "msedge.exe"; // Windows 10/11 default browser
                 string tempProfile = Path.Combine(Path.GetTempPath(), "SE_FUE_Profile");
-                psi.Arguments = string.Format("--user-data-dir=\"{0}\" --allow-file-access-from-files --app=\"{1}\" --window-size=1280,720", tempProfile, url);
+                psi.Arguments = string.Format("--user-data-dir=\"{0}\" --allow-file-access-from-files --disable-http-cache --aggressive-cache-discard --app=\"{1}\" --window-size=1280,720", tempProfile, url);
                 psi.UseShellExecute = true;
 
                 try

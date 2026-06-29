@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Special+Elite&display=swap" rel="stylesheet">
 
-    <!-- Stylesheets -->
+    <!-- Estilos -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/screens.css">
     <link rel="stylesheet" href="css/game.css">
@@ -119,10 +119,13 @@
             </div>
 
             <div class="title-menu">
-                <button id="btn-iniciar" class="btn-industrial btn-neon btn-large">
-                    <span class="btn-icon">⚡</span> INICIAR MISIÓN
+                <button id="btn-iniciar" class="btn-industrial btn-primary btn-large">
+                    INICIAR ESTABILIZACIÓN
                 </button>
-                <button id="btn-manual" class="btn-industrial btn-neon">
+                <button id="btn-title-store" class="btn-industrial btn-neon btn-large">
+                    KIOSKO DE FIRULAIS
+                </button>
+                <button id="btn-manual" class="btn-industrial btn-neon btn-large">
                     <span class="btn-icon">📖</span> MANUAL DEL OPERARIO
                 </button>
                 <button id="btn-leaderboard" class="btn-industrial btn-neon">
@@ -146,6 +149,36 @@
 
         <!-- Spark particles canvas -->
         <canvas id="sparks-canvas" class="sparks-canvas"></canvas>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: INTRO CINEMÁTICA UJAP                -->
+    <!-- ============================================ -->
+    <div id="screen-intro" class="screen">
+        <div class="intro-container">
+            <div class="intro-visual">
+                <!-- Simulación de la entrada de la UJAP -->
+                <div class="ujap-gate">
+                    <h1 class="glitch" data-text="UNIVERSIDAD JOSÉ ANTONIO PÁEZ">UNIVERSIDAD JOSÉ ANTONIO PÁEZ</h1>
+                </div>
+            </div>
+            <div class="intro-terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">SISTEMA DE EMERGENCIA UJAP v1.0</span>
+                </div>
+                <div class="terminal-body" id="intro-text-container">
+                    <p class="typewriter-text">> ALERTA CRÍTICA: Apagón masivo detectado.</p>
+                    <p class="typewriter-text">> Servidores de Tesis en La Pecera: CONGELADOS.</p>
+                    <p class="typewriter-text">> Cavas de Tequeños en El Sambilito: DESCONGELÁNDOSE.</p>
+                    <p class="typewriter-text">> Operario asignado: Tú.</p>
+                    <p class="typewriter-text blink">> Presiona cualquier tecla para acceder a la planta...</p>
+                </div>
+            </div>
+            <button id="btn-skip-intro" class="btn-industrial btn-neon" style="margin-top:20px;">[ ENTRAR A LA PLANTA ]</button>
+        </div>
     </div>
 
     <!-- ============================================ -->
@@ -176,9 +209,16 @@
             <div class="hud-section hud-score-section">
                 <span class="hud-label">ENERGÍA (PTS)</span>
                 <span id="hud-score" class="hud-value hud-score">0</span>
-                <button id="btn-game-manual" class="btn-industrial btn-small" style="margin-top: 10px; padding: 5px 10px; font-size: 8px;">
-                    <span class="btn-icon">📖</span> MANUAL
-                </button>
+                <span class="hud-label" style="margin-top:5px; color:var(--neon-yellow);">COINS UJAP</span>
+                <span id="hud-coins" class="hud-value" style="color:var(--neon-yellow);">0</span>
+                <div style="display:flex; gap: 5px; margin-top: 10px;">
+                    <button id="btn-game-manual" class="btn-industrial btn-small" style="padding: 5px 10px; font-size: 8px;">
+                        <span class="btn-icon">📖</span> MANUAL
+                    </button>
+                    <button id="btn-game-store" class="btn-industrial btn-small" style="padding: 5px 10px; font-size: 8px; border-color: var(--neon-yellow); color: var(--neon-yellow);">
+                        <span class="btn-icon">🐶</span> KIOSKO
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -245,11 +285,157 @@
                     <div class="wire-cut-container" id="wire-cut-container"></div>
                 </div>
             </div>
+
+            <!-- Memory Game Controls (Level 6) -->
+            <div id="memory-controls" class="game-controls memory-controls">
+                <div class="memory-grid" id="memory-grid"></div>
+            </div>
+
+            <!-- Sequence Controls (Level 7) -->
+            <div id="sequence-controls" class="game-controls sequence-controls">
+                <p class="sequence-instrucciones">Arrastra los bloques para ordenar la secuencia correcta.</p>
+                <div class="sequence-container" id="sequence-container"></div>
+                <button id="btn-sequence-confirm" class="btn-industrial btn-confirm" style="margin-top:15px;">
+                    <span class="btn-icon">⚡</span> CONFIRMAR SECUENCIA
+                </button>
+            </div>
+
+            <!-- Quick Math Controls (Level 8) -->
+            <div id="quickmath-controls" class="game-controls quickmath-controls">
+                <div class="quickmath-display" id="quickmath-display"></div>
+                <div class="quickmath-input-container">
+                    <input type="number" id="quickmath-input" class="input-industrial" placeholder="?" autocomplete="off">
+                    <button id="btn-quickmath-submit" class="btn-industrial btn-confirm">
+                        <span class="btn-icon">⚡</span> RESPONDER
+                    </button>
+                </div>
+                <div class="quickmath-progress" id="quickmath-progress">0/3</div>
+            </div>
+
+            <!-- Circuit Maze Controls (Level 9) -->
+            <div id="circuitmaze-controls" class="game-controls circuitmaze-controls">
+                <p class="circuitmaze-instrucciones">Toca los nodos para trazar una ruta desde IN hasta OUT.</p>
+                <div class="circuitmaze-grid" id="circuitmaze-grid"></div>
+            </div>
         </div>
 
         <!-- Feedback Overlay -->
         <div id="feedback-overlay" class="feedback-overlay">
             <div id="feedback-text" class="feedback-text"></div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCREEN: KIOSKO DE FIRULAIS v2               -->
+    <!-- ============================================ -->
+    <div id="screen-store" class="screen" style="z-index: 1000;">
+        <div class="store-container">
+            <!-- Mensaje flotante -->
+            <div id="store-message" class="store-message"></div>
+
+            <h1 class="store-title glitch" data-text="EL KIOSKO DE FIRULAIS">EL KIOSKO DE FIRULAIS</h1>
+            
+            <!-- Header: Firulais + diálogo + monedas -->
+            <div class="store-header">
+                <div class="store-firulais">🐶🐾</div>
+                <div class="store-dialogue" id="store-dialogue">"¡Guau guau! (¿Qué vas a llevar, estudiante? Todo está caro hoy)"</div>
+                <div class="store-coins-badge">💰 <span id="store-coins-display">0</span></div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="store-tabs">
+                <button class="store-tab active" data-store-tab="shop">🛒 TIENDA</button>
+                <button class="store-tab" data-store-tab="roulette">🎰 RULETA</button>
+                <button class="store-tab" data-store-tab="cosmetics">✨ EXTRAS</button>
+            </div>
+
+            <!-- Tab: TIENDA -->
+            <div class="store-tab-content active" id="store-tab-shop">
+                <div class="store-items">
+                    <div class="store-item">
+                        <span class="item-icon">🥟</span>
+                        <div class="item-info">
+                            <h3>Tequeño Grande</h3>
+                            <p>Te resuelve la vida. +30 Segundos de tiempo extra.</p>
+                        </div>
+                        <button class="btn-industrial btn-buy" data-item="tequeno" data-cost="150">150 COINS</button>
+                    </div>
+                    <div class="store-item">
+                        <span class="item-icon">📝</span>
+                        <div class="item-info">
+                            <h3>Apuntes de Ingeniería</h3>
+                            <p>Salta la pregunta actual automáticamente.</p>
+                        </div>
+                        <button class="btn-industrial btn-buy" data-item="apuntes" data-cost="300">300 COINS</button>
+                    </div>
+                    <div class="store-item">
+                        <span class="item-icon">⚡</span>
+                        <div class="item-info">
+                            <h3>Doble Energía</h3>
+                            <p>La próxima respuesta correcta da x2 puntos.</p>
+                        </div>
+                        <button class="btn-industrial btn-buy" data-item="doble" data-cost="200">200 COINS</button>
+                    </div>
+                    <div class="store-item">
+                        <span class="item-icon">❄️</span>
+                        <div class="item-info">
+                            <h3>Congelar Tiempo</h3>
+                            <p>Pausa el reloj por 15 segundos.</p>
+                        </div>
+                        <button class="btn-industrial btn-buy" data-item="freeze" data-cost="250">250 COINS</button>
+                    </div>
+                    <div class="store-item">
+                        <span class="item-icon">💡</span>
+                        <div class="item-info">
+                            <h3>Pista Extra</h3>
+                            <p>Firulais te susurra cuál NO es la respuesta.</p>
+                        </div>
+                        <button class="btn-industrial btn-buy" data-item="hint" data-cost="175">175 COINS</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: RULETA -->
+            <div class="store-tab-content" id="store-tab-roulette">
+                <div class="roulette-section">
+                    <p class="store-desc">Apuesta tus coins. Puedes ganar el TRIPLE o quedarte sin pasaje.</p>
+                    <div class="roulette-casino">
+                        <div class="roulette-pointer">▼</div>
+                        <canvas id="roulette-canvas" width="280" height="280"></canvas>
+                    </div>
+                    <div class="roulette-controls">
+                        <input type="number" id="bet-amount" class="input-bet" placeholder="Apuesta" min="10" step="10">
+                        <button id="btn-spin-roulette" class="btn-industrial btn-neon">🎰 GIRAR</button>
+                    </div>
+                    <div id="roulette-result" class="roulette-result"></div>
+                </div>
+            </div>
+
+            <!-- Tab: COSMÉTICOS -->
+            <div class="store-tab-content" id="store-tab-cosmetics">
+                <div class="cosmetics-grid">
+                    <div class="cosmetic-card" data-cosmetic="franela" data-cost="500">
+                        <div class="cosmetic-icon">👕🐶</div>
+                        <div class="cosmetic-name">Franela de Graduación</div>
+                        <div class="cosmetic-desc">Firulais con su franela de acto de grado</div>
+                        <button class="btn-industrial btn-buy">500 COINS</button>
+                    </div>
+                    <div class="cosmetic-card" data-cosmetic="gorra" data-cost="300">
+                        <div class="cosmetic-icon">🎓🐶</div>
+                        <div class="cosmetic-name">Birrete UJAP</div>
+                        <div class="cosmetic-desc">Firulais graduado, todo un licenciado</div>
+                        <button class="btn-industrial btn-buy">300 COINS</button>
+                    </div>
+                    <div class="cosmetic-card" data-cosmetic="neon" data-cost="1000">
+                        <div class="cosmetic-icon">🌈</div>
+                        <div class="cosmetic-name">Modo Neón UJAP</div>
+                        <div class="cosmetic-desc">Cambia los colores del juego a neón puro</div>
+                        <button class="btn-industrial btn-buy">1000 COINS</button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="btn-store-close" class="btn-industrial btn-danger store-close-btn">VOLVER AL TRABAJO</button>
         </div>
     </div>
 
@@ -481,9 +667,16 @@
             <h1 class="victory-title">⚡ ENERGÍA RESTAURADA ⚡</h1>
             <h2 class="victory-subtitle">¡Misión Completada, Operario!</h2>
             <div class="victory-info">
-                <p class="victory-score-label">PUNTUACIÓN FINAL</p>
+                <p class="victory-score-label">RANGO OBTENIDO</p>
+                <h3 id="victory-rank" class="victory-rank" style="color:var(--neon-cyan); font-family:var(--font-heading); font-size:24px; text-shadow: 0 0 10px var(--neon-cyan); margin: 10px 0;">Calculando...</h3>
+                
+                <p class="victory-score-label" style="margin-top:20px;">ENERGÍA RESTAURADA</p>
                 <p id="victory-score" class="victory-score">0</p>
-                <p id="victory-time" class="victory-time">Tiempo restante: 00:00</p>
+                
+                <p class="victory-score-label" style="margin-top:10px; color:var(--neon-yellow);">MONEDAS SOBRANTES</p>
+                <p id="victory-coins" class="victory-score" style="color:var(--neon-yellow); font-size: 24px;">0</p>
+
+                <p id="victory-time" class="victory-time" style="margin-top:10px;">Tiempo restante: 00:00</p>
             </div>
             <div class="victory-actions">
                 <button id="btn-victory-menu" class="btn-industrial btn-neon btn-large">
@@ -609,6 +802,5 @@
     <!-- SCRIPTS (ES6 Modules)                        -->
     <!-- ============================================ -->
     <script type="module" src="js/app.js"></script>
-
 </body>
 </html>

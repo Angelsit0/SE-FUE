@@ -20,6 +20,11 @@ import { VictoryView } from '../view/VictoryView.js';
 import { RegisterView } from '../view/RegisterView.js';
 import { AdminView } from '../view/AdminView.js';
 
+import { MemoryGameView } from '../view/MemoryGameView.js';
+import { SequenceView } from '../view/SequenceView.js';
+import { QuickMathView } from '../view/QuickMathView.js';
+import { CircuitMazeView } from '../view/CircuitMazeView.js';
+
 import { InputController } from './InputController.js';
 import { AudioController } from './AudioController.js';
 
@@ -41,6 +46,12 @@ export class GameController {
         this.victoryView = new VictoryView();
         this.registerView = new RegisterView();
         this.adminView = new AdminView();
+        
+        // Mini-game views
+        this.memoryView = new MemoryGameView();
+        this.sequenceView = new SequenceView();
+        this.quickmathView = new QuickMathView();
+        this.circuitmazeView = new CircuitMazeView();
 
         // ─── Controladores ───
         this.inputController = new InputController();
@@ -139,7 +150,7 @@ export class GameController {
                 this.audio.playClick();
                 this.vennView.resetSelection();
             },
-            onIniciar: () => this._startGame(),
+            onIniciar: () => this._startIntro(),
             onManual: () => {
                 this.audio.playClick();
                 this.manualView.reset();
@@ -161,7 +172,8 @@ export class GameController {
             onLogout: () => this._handleLogout(),
             onRetry: () => this._startGame(),
             onMenuFromGameover: () => this._goToTitle(),
-            onMenuFromVictory: () => this._goToTitle()
+            onMenuFromVictory: () => this._goToTitle(),
+            onSkipIntro: () => this._startGame()
         });
     }
 
@@ -176,6 +188,7 @@ export class GameController {
         const result = this.userModel.login(username, password);
         if (result.success) {
             gameState.setUser(result.user);
+            gameState.coins = result.user.coins || 0; // Cargar monedas
             this.titleView.updateUsername(result.user.name);
             this.screenManager.showScreen('screen-title', 'fade');
         } else {
@@ -248,6 +261,12 @@ export class GameController {
     // GAME LOOP
     // ═══════════════════════════════════════════════
 
+    _startIntro() {
+        this.audio.init();
+        this.audio.playClick();
+        this.screenManager.showScreen('screen-intro', 'fade');
+    }
+
     _startGame() {
         this.audio.init();
         this.audio.resume();
@@ -281,6 +300,9 @@ export class GameController {
         const level = LEVELS[levelIndex];
         if (!level) return;
 
+        // Play level specific music
+        this.audio.playLevelMusic(levelIndex);
+
         // Fetch random problem for this level
         const problem = getRandomProblem(levelIndex);
         gameState.currentProblem = problem;
@@ -300,7 +322,34 @@ export class GameController {
             this._renderWiresConnect(problem);
         } else if (problem.type === 'wires-cut') {
             this._renderWiresCut(problem);
+        } else if (problem.type === 'memory') {
+            this.memoryView.render(problem, 
+                () => this._processAnswer(true), 
+                () => { this.audio.playFail(); gameState.removeTime(5); } // Solo quita 5s por error en memoria
+            );
+        } else if (problem.type === 'sequence') {
+            this.sequenceView.render(problem, (isCorrect) => this._processAnswer(isCorrect));
+        } else if (problem.type === 'quickmath') {
+            this.quickmathView.render(problem, 
+                () => this._processAnswer(true), 
+                () => this._processAnswer(false)
+            );
+        } else if (problem.type === 'circuitmaze') {
+            this.circuitmazeView.render(problem, 
+                () => this._processAnswer(true), 
+                () => this._processAnswer(false)
+            );
+        } else if (problem.type === 'boss') {
+            // Boss mechanic will be mixed
+            this._startBossSequence(problem);
         }
+    }
+
+    _startBossSequence(problem) {
+        // Implementación del boss: seleccionamos 3 problemas al azar de los niveles 1-9
+        // Esto puede ir en otra función o fase
+        this.gameView.showFeedback(true);
+        setTimeout(() => gameState.nextLevel(), 1000); // Placeholder por ahora
     }
 
     _renderWiresConnect(problem) {
@@ -483,6 +532,7 @@ export class GameController {
             // ¡Correcto!
             this.audio.playSuccess();
             gameState.addScore(500);
+            gameState.addCoins(10); // Recompensa de monedas
             gameState.addTime(15);
             this.gameView.showFeedback(true);
 
@@ -534,6 +584,13 @@ export class GameController {
                 this.gameView.updateScore(data.score);
                 break;
 
+            case 'coinsChanged':
+                this.gameView.updateCoins(data.coins);
+                if (gameState.currentUser) {
+                    this.userModel.updateCoins(gameState.currentUser.id, data.coins);
+                }
+                break;
+
             case 'timeAdded':
                 this.gameView.updateTimer(gameState.getFormattedTime(), gameState.getTimePercent());
                 break;
@@ -543,7 +600,7 @@ export class GameController {
                 break;
 
             case 'levelChanged':
-                this._loadLevel(data.level);
+                this._showLevelTransition(data.level);
                 break;
 
             case 'gameOver':
@@ -554,6 +611,40 @@ export class GameController {
                 this._handleVictory(data);
                 break;
         }
+    }
+
+    _showLevelTransition(levelIndex) {
+        // Sonido de transición
+        this.audio.playTransition();
+
+        // Crear/mostrar overlay de transición con cameo
+        let overlay = document.getElementById('transition-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'transition-overlay';
+            overlay.className = 'transition-overlay';
+            document.body.appendChild(overlay);
+        }
+
+        // Variaciones de Firulais
+        const cameos = ['🐶', '🐕', '🐩', '🐾'];
+        const cameo = cameos[Math.floor(Math.random() * cameos.length)];
+
+        overlay.innerHTML = `
+            <div class="transition-content">
+                <div class="cameo-icon" style="font-size: 80px; animation: bounce 1s infinite;">${cameo}</div>
+                <h2 style="color: var(--neon-cyan); font-family: var(--font-heading); font-size: 20px; text-shadow: 0 0 10px var(--neon-cyan);">CARGANDO SECTOR ${levelIndex + 1}...</h2>
+                <p style="color: var(--text-primary); font-family: var(--font-body); font-size: 16px;">Firulais te guía a través de la oscuridad...</p>
+            </div>
+        `;
+        
+        overlay.classList.add('active');
+
+        // Después de 1.5s, cargar el nivel real y quitar el overlay
+        setTimeout(() => {
+            this._loadLevel(levelIndex);
+            overlay.classList.remove('active');
+        }, 1500);
     }
 
     // ═══════════════════════════════════════════════
@@ -580,9 +671,23 @@ export class GameController {
         this.timer.stop();
         this.audio.stopAmbientHum();
 
+        // Calcular Rango
+        const finalScore = data.score;
+        const coins = gameState.coins;
+        const totalValue = finalScore + (coins * 50); // 1 coin = 50 puntos
+        let rank = "Pobre webón";
+        
+        if (totalValue > 6000) rank = "Licenciado con billete";
+        else if (totalValue > 4000) rank = "Ingeniero Sobreviviente";
+        else if (totalValue > 2000) rank = "Foráneo Agotado";
+
         // Registrar puntuación
         const userName = gameState.currentUser ? gameState.currentUser.name : 'Anónimo';
         this.leaderboard.addEntry(userName, data.score, 4);
+
+        if (gameState.currentUser) {
+            this.userModel.incrementGamesWon(gameState.currentUser.id);
+        }
 
         // Mostrar pantalla de victoria con animación de generador
         setTimeout(() => {
@@ -636,7 +741,7 @@ export class GameController {
                         setTimeout(() => {
                             animContainer.style.display = 'none';
                             victoryContent.style.display = 'flex';
-                            this.victoryView.show(data.score, gameState.getFormattedTime());
+                            this.victoryView.show(data.score, gameState.getFormattedTime(), rank, coins);
                         }, 200);
                     }
                 }, 300);
